@@ -4,4 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :posts
   resources :users, only: [:edit, :update]
+  resources :maps, only: [:index, :map]
+  # get '/map_request', to: 'posts#map', as: 'map_request'
+  post '/map_request', to: 'maps#map', as: 'map_request'
 end

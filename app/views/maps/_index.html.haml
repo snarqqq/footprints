@@ -1,0 +1,22 @@
+/ form_withはデフォルトでremote: trueの挙動になります
+= form_with url: map_request_path, method: :post, class: "search_form" do |f|
+  = f.text_field :address, placeholder: "Type place", class: "search_box"
+  = f.submit 'Search'
+#map
+:css
+  #map{
+    height: 400px;
+    width: 900px;
+    margin: 20px 0;
+  }
+:javascript
+  let mapInstance //この変数はmap.js.erbでも使うのでタイプミスに注意
+
+  function initMap(){
+    mapInstance = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 35.6806, lng: 139.769},
+    zoom: 1
+    });
+  }
+
+%script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.gcp_api_key}&callback=initMap"}

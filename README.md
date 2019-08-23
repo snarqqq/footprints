@@ -51,8 +51,9 @@ add_index :users,  :username
 |body|text||
 |image|string||
 |user_id|references|null: false, foreign_key: true|
+|map_id|references|null: false, foreign_key: true|
 
-Messageモデル内でbodyカラムかimageカラムのどちらかがnullでなければ良いバリデーション
+Postモデル内でbodyカラムかimageカラムのどちらかがnullでなければ良いバリデーション
 ```
   validates :body_or_image, presence: true
 
@@ -65,6 +66,7 @@ Messageモデル内でbodyカラムかimageカラムのどちらかがnullでな
 ### Association
 - belongs_to :user
 - has_many :comments
+- belongs_to :map
 
 
 ## commentsテーブル
@@ -78,3 +80,14 @@ Messageモデル内でbodyカラムかimageカラムのどちらかがnullでな
 ### Association
 - belongs_to :user
 - belongs_to :post
+
+## mapsテーブル
+
+|Column|Type|Options|
+|------|----|-------|
+|place|string|null: false|
+|lat|float|null: false|
+|lon|float|null: false|
+
+### Association
+- has_many :posts

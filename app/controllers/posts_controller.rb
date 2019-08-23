@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+    @post = Post.new
   end
 
   # GET /posts/1
@@ -25,6 +26,8 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    # map = Map.new(place: @place, lat: @latlng[0], lon: @latlng[1])
+    # @post.map << map
 
     respond_to do |format|
       if @post.save
@@ -69,6 +72,8 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:body, :image).merge(user_id: current_user.id)
+      latest_map = Map.order('id ASC').limit(1)
+      params.require(:post).permit(:body, :image).merge(user_id: current_user.id, map_id: latest_map[0][:id])
     end
+
 end
