@@ -3,20 +3,55 @@
   = f.text_field :address, placeholder: "Type place", class: "search_box"
   = f.submit 'Search'
 #map
+
 :css
   #map{
     height: 400px;
     width: 900px;
     margin: 20px 0;
   }
+
 :javascript
-  let mapInstance //この変数はmap.js.erbでも使うのでタイプミスに注意
+  let map; //この変数はmap.js.erbでも使うのでタイプミスに注意
+  let service;
+  let infowindow;
+
 
   function initMap(){
-    mapInstance = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 35.6806, lng: 139.769},
     zoom: 1
     });
+
+    infowindow = new google.maps.InfoWindow();
+
+    let request = {
+      query: 'Museum of Contemporary Art Australia',
+      fields: ['name', 'geometry'],
+    };
+
+    let service = new google.maps.places.PlacesService(map);
+
+    service.findPlaceFromQuery(request, function(results, status) {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+          createMarker(results[i]);
+        }
+        map.setCenter(results[0].geometry.location);
+      }
+    });
   }
 
-%script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.gcp_api_key}&callback=initMap&libraries=places"}
+  function createMarker(place) {
+    let marker = new google.maps.Marker({
+      map: map,
+      position: place.geometry.location
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.setContent(place.name);
+      infowindow.open(map, this);
+    });
+  }
+
+%script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.gcp_api_key}&libraries=places&callback=initMap"}
