@@ -10,13 +10,11 @@ $(document).on('turbolinks:load', function() {
     findPlace();
   });
 
-
 });
 
 let map; //この変数はmap.js.erbでも使うのでタイプミスに注意
 let service;
 let infowindow;
-
 
 function initMap(){
 // Create a new StyledMapType object, passing it an array of styles,
@@ -148,28 +146,13 @@ var styledMapType = new google.maps.StyledMapType(
   map.mapTypes.set('styled_map', styledMapType);
   map.setMapTypeId('styled_map');
 
-  // infowindow = new google.maps.InfoWindow();
-
-  // let request = {
-  //   query: 'Museum of Contemporary Art Australia',
-  //   fields: ['name', 'geometry'],
-  // };
-
-  // let service = new google.maps.places.PlacesService(map);
-
-  // service.findPlaceFromQuery(request, function(results, status) {
-  //   if (status === google.maps.places.PlacesServiceStatus.OK) {
-  //     for (var i = 0; i < results.length; i++) {
-  //       createMarker(results[i]);
-  //     }
-  //     map.setCenter(results[0].geometry.location);
-
-  //     console.log(status);
-  //     console.log(results[0]);
-  //     console.log(results[0].geometry.location);
-  //   }
-  // });
 }
+
+
+let foundPlaceName;
+let foundGeometry;
+let foundPlaceId;
+let foundIcon;
 
 function findPlace(){
   infowindow = new google.maps.InfoWindow();
@@ -191,7 +174,10 @@ function findPlace(){
         createMarker(results[i]);
       }
       map.setCenter(results[0].geometry.location);
-
+      foundPlaceName = results[0].name;
+      foundGeometry = results[0].geometry.location;
+      foundPlaceId = results[0].place_id;
+      foundIcon = results[0].icon;
     }
   });
 
