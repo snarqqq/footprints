@@ -25,14 +25,15 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    binding.pry
+    @place = Place.new(place_params)
     @post = Post.new(post_params)
-    # map = Map.new(place: @place, lat: @latlng[0], lon: @latlng[1])
-    # @post.map << map
 
     respond_to do |format|
-      if @post.save
+      @place.save!
+      if @place.posts.create(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
+        format.json
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -72,8 +73,11 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      latest_map = Map.order('id ASC').limit(1)
-      params.require(:post).permit(:body, :image).merge(user_id: current_user.id, map_id: latest_map[0][:id])
+      params.require(:post).permit(:title, :visit_date, :body).merge(user_id: current_user.id)
+    end
+
+    def place_params
+      params.permit(:place_id, :lat, :lng)
     end
 
 end

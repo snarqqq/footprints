@@ -32,83 +32,28 @@
     .posts
       = render @posts
 
+.newpost-modal-wrapper
+  .newpost-modal
+    .newpost-modal__bg.newpost-modal__close
+    .newpost-modal__content
+
+      .newpost-form
+        = form_with model: @post, class:'newpost-form__form', id: 'newpost-form__form', local: true do |f|
+          %h3.newpost-form__head
+            投稿内容を入力してください
+          .newpost-form__content
+            あなたが出品した商品は「出品した商品一覧」からいつでも見ることができます。
+
+            .newpost-form__title
+              = f.text_field :title, placeholder: "タイトル（必須40文字まで）", value: ""
 
 
+            .newpost-form__visit-date
+              = f.date_field :visit_date
 
+            .newpost-form__body
+              = f.text_area :body, placeholder: "本文を入力"
 
-      -# %h2 gmap
-      -# / 地名入力用のinputを追加
-      -# %input#address{:type => "textbox", :value => "Sydney, NSW"}/
-      -# / buttonをクリックしたらcodeAddressを実行　
-      -# %input{:onclick => "codeAddress()", :type => "button", :value => "Encode"}/
-      -# #map
-      -# :css
-      -#   #map{
-      -#     height: 400px;
-      -#     width: 600px;
-      -#     margin: 20px 0;
-      -#   }
-      -# :javascript
-      -#   /*
-      -#   mapを関数の外で定義(codeAddressでも使うため)
-      -#   geocoderを用意
-      -#   */
-        
-      -#   let map
-      -#   let geocoder
-        
-      -#   function initMap(){
-      -#     // geocoderを初期化
-      -#     geocoder = new google.maps.Geocoder()
-        
-      -#     map = new google.maps.Map(document.getElementById('map'), {
-      -#     center: {lat: -34.397, lng: 150.644},
-      -#     zoom: 8
-      -#     });
-      -#   }
-        
-      -#   function codeAddress(){
-      -#     // 入力を取得
-      -#     let inputAddress = document.getElementById('address').value;
-        
-      -#     // geocodingしたあとmapを移動
-      -#     geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-      -#       if (status == 'OK') {
-      -#   　　　　　　　　　　　　// map.setCenterで地図が移動
-      -#         map.setCenter(results[0].geometry.location);
-      -#         map.setZoom(15);
-      -#   　　　  // google.maps.MarkerでGoogleMap上の指定位置にマーカが立つ
-      -#         var marker = new google.maps.Marker({
-      -#             map: map,
-      -#             position: results[0].geometry.location
-      -#         });
-      -#       } else {
-      -#         alert('Geocode was not successful for the following reason: ' + status);
-      -#       }
-      -#     });
-      -#   }
-      -# %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.gcp_api_key}&callback=initMap"}
+            = f.submit "投稿する", { id: 'item-submit', data: {disable_with: false}}
 
-
-
-
-
--# %h1 Listing posts
-
--# %table
--#   %thead
--#     %tr
--#       %th
--#       %th
--#       %th
-
--#   %tbody
--#     - @posts.each do |post|
--#       %tr
--#         %td= link_to 'Show', post
--#         %td= link_to 'Edit', edit_post_path(post)
--#         %td= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }
-
--# %br
-
--# = link_to 'New Post', new_post_path
+            = link_to '閉じる', '#', class: 'newpost-modal__close'
