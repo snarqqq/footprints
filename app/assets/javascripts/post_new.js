@@ -21,6 +21,7 @@ $(document).on('turbolinks:load', function() {
     // }];
     // console.log(placeData);
     // formData.append('place', placeData);
+    formData.append('place_name', clickPlace.name);
     formData.append('place_id', clickPlace.place_id);
     formData.append('lat', clickPlace.geometry.location.lat());
     formData.append('lng', clickPlace.geometry.location.lng());
@@ -34,6 +35,11 @@ $(document).on('turbolinks:load', function() {
       contentType: false
     })
     .done(function(data){
+      $('.newpost-modal-wrapper').fadeOut();
+
+      // フォームを初期化するコード
+
+      infowindow.close();
     })
     .fail(function(){
       alert('error');
