@@ -25,7 +25,6 @@ $(document).on('turbolinks:load', function() {
     formData.append('place_id', clickPlace.place_id);
     formData.append('lat', clickPlace.geometry.location.lat());
     formData.append('lng', clickPlace.geometry.location.lng());
-    console.log(clickPlace.geometry.location);
     $.ajax({
       url: '/posts',
       type: "POST",

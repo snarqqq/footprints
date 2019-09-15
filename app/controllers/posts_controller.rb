@@ -4,8 +4,11 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
-    @post = Post.new
+    @posts = current_user.posts.includes(:place)
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   # GET /posts/1
@@ -25,12 +28,11 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    binding.pry
     @place = Place.find_or_initialize_by(place_id: place_params[:place_id])
     @place.lat = place_params[:lat]
     @place.lng = place_params[:lng]
     # @place = Place.where(place_id: place_params[:place_id], lat: place_params[:lat], lng: place_params[:lng]).first_or_initialize
-    @post = Post.new(post_params)
+    # @post = Post.new(post_params)
 
     respond_to do |format|
       @place.save
@@ -77,7 +79,8 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       place_name = params.require(:place_name)
-      params.require(:post).permit(:title, :visit_date, :body).merge(user_id: current_user.id, place_name: place_name)
+      # params.require(:post).permit(:title, :visit_date, :body).merge(user_id: current_user.id, place_name: place_name)
+      params.permit(:title, :visit_date, :body).merge(user_id: current_user.id, place_name: place_name)
     end
 
     def place_params

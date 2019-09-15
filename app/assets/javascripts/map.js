@@ -140,14 +140,17 @@ const styledMapType = new google.maps.StyledMapType(
   //Associate the styled map with the MapTypeId and set it to display.
   map.mapTypes.set('styled_map', styledMapType);
   map.setMapTypeId('styled_map');
+
+  infowindow = new google.maps.InfoWindow();
+  createFootprints();
 }
 
 
 let clickPlace;
-let foundPlaceName;
-let foundGeometry;
-let foundPlaceId;
-let foundIcon;
+// let foundPlaceName;
+// let foundGeometry;
+// let foundPlaceId;
+// let foundIcon;
 
 function findPlace(){
   infowindow = new google.maps.InfoWindow();
@@ -199,5 +202,55 @@ function createMarker(place) {
 
   // infowindow.setContent(place.name);
   // infowindow.open(map, marker);
+
+}
+
+function createMarkerFromDB(place) {
+  let position = {lat: place.lat, lng: place.lng};
+  let marker = new google.maps.Marker({
+    map: map,
+    animation: google.maps.Animation.DROP,
+    position: position
+  });
+
+  let content =`<div>
+                ${place.place_name}
+                <h2>ここを訪れました。</h2>
+                <a class="newpost-link" href=''>ここに投稿</a>
+                </div>`
+
+  google.maps.event.addListener(marker, 'click', function() {
+    // clickPlace = place;
+    infowindow.setContent(content);
+    infowindow.open(map, this);
+  });
+
+  // infowindow.setContent(place.name);
+  // infowindow.open(map, marker);
+
+}
+
+
+function createFootprints() {
+  // AjaxでDBから情報取得
+  $.ajax({
+    url: '/posts',
+    type: "GET",
+    // data: formData,
+    dataType: 'json',
+  })
+  .done(function(posts){
+    // 同じ場所にマーカーをつくらないような処理？
+    console.log('ajax-done');
+    console.log(posts);
+    posts.forEach(function(post){
+      createMarkerFromDB(post);
+    });
+  })
+  .fail(function(){
+    alert('error_createFootprints');
+  })
+  .always(function(){
+  })
 
 }
