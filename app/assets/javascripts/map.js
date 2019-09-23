@@ -236,13 +236,29 @@ function createFootprints() {
   $.ajax({
     url: '/posts',
     type: "GET",
-    // data: formData,
     dataType: 'json',
   })
   .done(function(posts){
     // 同じ場所にマーカーをつくらないような処理？
     console.log('ajax-done');
     console.log(posts);
+
+    // place_id_fkが重複
+    let filteredPosts = posts.filter(function(v,i,a){ 
+      return (a.findIndex(function(v2){ 
+        return (v.place_id_fk === v2.place_id_fk)
+      }) === i);
+    });
+
+    console.log(filteredPosts);
+
+    // let filteredPosts = posts.filter(function (x, i, self) {
+    //   return self.indexOf(x.place_id) === i;
+    // });
+
+    // アロー関数
+    // let b1 = a.filter((x, i, self) => self.indexOf(x) === i);
+
     posts.forEach(function(post){
       createMarkerFromDB(post);
     });
