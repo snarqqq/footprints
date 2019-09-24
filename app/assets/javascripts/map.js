@@ -152,7 +152,7 @@ let clickPlace;
 // let foundGeometry;
 // let foundPlaceId;
 // let foundIcon;
-let findPlaceMakers = [];
+let foundPlaceMarkers = [];
 
 
 function findPlace(){
@@ -205,6 +205,8 @@ function createMarker(place) {
 
   // infowindow.setContent(place.name);
   // infowindow.open(map, marker);
+
+  foundPlaceMarkers.push(marker);
 
 }
 
@@ -286,4 +288,20 @@ function createFootprints() {
   .always(function(){
   })
 
+}
+
+
+function setMapOnAll(map) {
+  for (var i = 0; i < foundPlaceMarkers.length; i++) {
+    foundPlaceMarkers[i].setMap(map);
+  }
+}
+
+function clearMarkers() {
+  setMapOnAll(null);
+}
+
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
 }

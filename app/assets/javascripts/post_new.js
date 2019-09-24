@@ -33,12 +33,15 @@ $(document).on('turbolinks:load', function() {
       processData: false,
       contentType: false
     })
-    .done(function(data){
+    .done(function(post){
       $('.newpost-modal-wrapper').fadeOut();
 
       // フォームを初期化するコード
 
       infowindow.close();
+      deleteMarkers();
+      console.log(post);
+      createMarkerFromDB(post);
     })
     .fail(function(){
       alert('error');

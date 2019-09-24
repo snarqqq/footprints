@@ -34,10 +34,11 @@ class PostsController < ApplicationController
     @place.lng = place_params[:lng]
     # @place = Place.where(place_id: place_params[:place_id], lat: place_params[:lat], lng: place_params[:lng]).first_or_initialize
     # @post = Post.new(post_params)
-
+    @place.save
+    @post = @place.posts.new(post_params)
     respond_to do |format|
-      @place.save
-      if @place.posts.create(post_params)
+      if @post.save
+        binding.pry
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json
       else
