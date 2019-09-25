@@ -156,6 +156,7 @@ let foundPlaceMarkers = [];
 
 
 function findPlace(){
+  deleteMarkers();
   infowindow = new google.maps.InfoWindow();
 
   let inputAddress = document.getElementById('address-input').value;
@@ -248,39 +249,34 @@ function createFootprints() {
     console.log('ajax-done');
     console.log(posts);
 
-    // place_id_fkの重複を排除し、iの若いもののみ残した配列
-    let filteredPosts = posts.filter(function(v,i,a){ 
-      return (a.findIndex(function(v2){ 
-        return (v.place_id_fk === v2.place_id_fk)
-      }) === i);
-    });
-
-    let reversedPosts = posts.slice().reverse();
-    console.log(reversedPosts);
-    let placesMultiple = posts.filter(function(v,i,a){
-      return (a.findIndex(function(v2){ 
-        return (v.place_id_fk === v2.place_id_fk)
-      }) === i
-      && reversedPosts.findIndex(function(v3){
-        return(v.place_id_fk === v3.place_id_fk)
-      }) !== (a.length - i - 1)
-      );
-    });
-
-
-    console.log(filteredPosts);
-    console.log(placesMultiple);
-
-    // let filteredPosts = posts.filter(function (x, i, self) {
-    //   return self.indexOf(x.place_id) === i;
+    // // place_id_fkの重複を排除し、iの若いもののみ残した配列
+    // let filteredPosts = posts.filter(function(v,i,a){ 
+    //   return (a.findIndex(function(v2){ 
+    //     return (v.place_id_fk === v2.place_id_fk)
+    //   }) === i);
     // });
 
-    // アロー関数
-    // let b1 = a.filter((x, i, self) => self.indexOf(x) === i);
+    // // 重複しているものの重複を取り除いた配列
+    // let reversedPosts = posts.slice().reverse();
+    // console.log(reversedPosts);
+    // let placesMultiple = posts.filter(function(v,i,a){
+    //   return (a.findIndex(function(v2){ 
+    //     return (v.place_id_fk === v2.place_id_fk)
+    //   }) === i
+    //   && reversedPosts.findIndex(function(v3){
+    //     return(v.place_id_fk === v3.place_id_fk)
+    //   }) !== (a.length - i - 1)
+    //   );
+    // });
 
-    posts.forEach(function(post){
-      createMarkerFromDB(post);
-    });
+    // posts.forEach(function(post){
+    //   createMarkerFromDB(post);
+    // });
+
+    for (var i = 0; i < posts.length; i++) {
+      addMarkerWithTimeout(posts[i], i * 200);
+    }  
+
   })
   .fail(function(){
     alert('error_createFootprints');
@@ -303,5 +299,24 @@ function clearMarkers() {
 
 function deleteMarkers() {
   clearMarkers();
-  markers = [];
+  foundPlaceMarkers = [];
+}
+
+
+function drop() {
+  // clearMarkers();
+  for (var i = 0; i < neighborhoods.length; i++) {
+    addMarkerWithTimeout(neighborhoods[i], i * 100);
+  }
+}
+
+function addMarkerWithTimeout(position, timeout) {
+  window.setTimeout(function() {
+    // markers.push(new google.maps.Marker({
+    //   position: position,
+    //   map: map,
+    //   animation: google.maps.Animation.DROP
+    // }));
+    createMarkerFromDB(position);
+  }, timeout);
 }
