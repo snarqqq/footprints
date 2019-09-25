@@ -226,7 +226,7 @@ function createMarkerFromDB(place) {
                 </div>`
 
   google.maps.event.addListener(marker, 'click', function() {
-    // clickPlace = place;
+    clickPlace = place;
     infowindow.setContent(content);
     infowindow.open(map, this);
   });
@@ -249,33 +249,30 @@ function createFootprints() {
     console.log('ajax-done');
     console.log(posts);
 
-    // // place_id_fkの重複を排除し、iの若いもののみ残した配列
-    // let filteredPosts = posts.filter(function(v,i,a){ 
-    //   return (a.findIndex(function(v2){ 
-    //     return (v.place_id_fk === v2.place_id_fk)
-    //   }) === i);
-    // });
+    // place_idの重複を排除し、iの若いもののみ残した配列
+    let filteredPosts = posts.filter(function(v,i,a){ 
+      return (a.findIndex(function(v2){ 
+        return (v.place_id === v2.place_id)
+      }) === i);
+    });
+    console.log(filteredPosts);
 
     // // 重複しているものの重複を取り除いた配列
     // let reversedPosts = posts.slice().reverse();
     // console.log(reversedPosts);
     // let placesMultiple = posts.filter(function(v,i,a){
     //   return (a.findIndex(function(v2){ 
-    //     return (v.place_id_fk === v2.place_id_fk)
+    //     return (v.place_id === v2.place_id)
     //   }) === i
     //   && reversedPosts.findIndex(function(v3){
-    //     return(v.place_id_fk === v3.place_id_fk)
+    //     return(v.place_id === v3.place_id)
     //   }) !== (a.length - i - 1)
     //   );
     // });
 
-    // posts.forEach(function(post){
-    //   createMarkerFromDB(post);
-    // });
-
-    for (var i = 0; i < posts.length; i++) {
-      addMarkerWithTimeout(posts[i], i * 200);
-    }  
+    for (var i = 0; i < filteredPosts.length; i++) {
+      addMarkerWithTimeout(filteredPosts[i], i * 100);
+    }
 
   })
   .fail(function(){
@@ -303,12 +300,12 @@ function deleteMarkers() {
 }
 
 
-function drop() {
-  // clearMarkers();
-  for (var i = 0; i < neighborhoods.length; i++) {
-    addMarkerWithTimeout(neighborhoods[i], i * 100);
-  }
-}
+// function drop() {
+//   // clearMarkers();
+//   for (var i = 0; i < neighborhoods.length; i++) {
+    // addMarkerWithTimeout(neighborhoods[i], i * 200);
+//   }
+// }
 
 function addMarkerWithTimeout(position, timeout) {
   window.setTimeout(function() {
