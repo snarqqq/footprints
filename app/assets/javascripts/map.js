@@ -213,8 +213,15 @@ function createMarker(place) {
 
 function createMarkerFromDB(place) {
   let position = {lat: place.lat, lng: place.lng};
+  let image = {
+    url: '/assets/footprint_marker.png'
+    // size: new google.maps.Size(20, 32),
+    // origin: new google.maps.Point(0, 0),
+    // anchor: new google.maps.Point(10, 32)
+  };
   let marker = new google.maps.Marker({
     map: map,
+    icon: image,
     animation: google.maps.Animation.DROP,
     position: position
   });
