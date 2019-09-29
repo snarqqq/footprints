@@ -37,11 +37,19 @@ class PostsController < ApplicationController
     @place.lng = place_params[:lng]
     # @place = Place.where(place_id: place_params[:place_id], lat: place_params[:lat], lng: place_params[:lng]).first_or_initialize
     # @post = Post.new(post_params)
-    @place.save
+    @place.save!
     @post = @place.posts.new(post_params)
+    @post.save!
+    binding.pry
+
+    if params[:images]
+      image_params[:image].each do |image|
+        @post.images.create(image: image, post_id: @post.id)
+      end
+    end
+
     respond_to do |format|
       if @post.save
-        binding.pry
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json
       else
@@ -91,5 +99,11 @@ class PostsController < ApplicationController
     def place_params
       params.permit(:place_id, :lat, :lng)
     end
+
+    def image_params
+      params.require(:images)
+      # params.require(:images).permit({image: {}})
+    end
+
 
 end

@@ -2,7 +2,8 @@ $(document).on('turbolinks:load', function() {
 
   $('#search-submit').on('click', function(e) {
     e.preventDefault();
-    findPlace();
+    ($('#address-input').val() === "") ? alert('場所を入力してください') : findPlace();
+    // findPlace();
   });
 
 });

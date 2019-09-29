@@ -47,9 +47,16 @@
             .newpost-form__title
               = f.text_field :title, placeholder: "タイトル（必須40文字まで）", value: ""
 
-
             .newpost-form__visit-date
               = f.date_field :visit_date
+
+            = f.fields_for :images do |fin|
+              =fin.label :image, multiple: true do
+                .item-registration__form__group__image{id: 'file-drop-area'}
+                  .nest-form__head
+                    = fin.file_field :image, multiple: true, name: 'images[image][]', style:"display:none;"
+                    %p ドラッグアンドドロップ
+                    %p またはクリックしてファイルをアップロード
 
             .newpost-form__body
               = f.text_area :body, placeholder: "本文を入力"

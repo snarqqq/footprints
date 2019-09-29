@@ -11,4 +11,5 @@
     margin: 20px 0;
   }
 
-%script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.gcp_api_key}&libraries=places&callback=initMap"}
+-# %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.gcp_api_key}&libraries=places&callback=initMap"}
+%script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['gcp_api_key']}&libraries=places&callback=initMap"}
