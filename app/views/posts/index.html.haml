@@ -18,6 +18,11 @@
     .map-wrapper
       = render 'maps/index'
 
+      -# パス確認用コード要削除
+      = image_path 'favicon.ico'
+      /assets/favicon-b1087636b2cfa51eb9a84b27639cbfee481132446133d3d9bc3092ee5cfc5b92.ico
+      = image_path '/favicon.ico'
+
       .form
         = form_with model: @post , class: 'form__box' do |f|
           .form__input-box
