@@ -214,8 +214,10 @@ function createMarker(place) {
 
 function createMarkerFromDB(place) {
   let position = {lat: place.lat, lng: place.lng};
+  let imageUrl = window.image_path('footprint_marker.png');
   let image = {
-    url: '/assets/footprint_marker.png'
+    // url: '/assets/footprint_marker.png'
+    url: imageUrl
     // size: new google.maps.Size(20, 32),
     // origin: new google.maps.Point(0, 0),
     // anchor: new google.maps.Point(10, 32)
