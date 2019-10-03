@@ -4,8 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = current_user.posts.includes(:place)
-
+    @posts = current_user.posts.includes(:place, :images)
     # @places = current_user.places.includes(:posts where ~~~)
 
     respond_to do |format|
