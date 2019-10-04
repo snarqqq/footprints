@@ -4,13 +4,6 @@ lock "~> 3.11.2"
 set :application, "footprints"
 set :repo_url, "git@github.com:snarqqq/footprints.git"
 
-set :default_env, {
-  rbenv_root: "/usr/local/rbenv",
-  path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH",
-  AWS_ACCESS_KEY_ID: Rails.application.credentials.aws[:access_key_id],
-  AWS_SECRET_ACCESS_KEY: Rails.application.credentials.aws[:secret_access_key]
-}
-
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -47,6 +40,7 @@ set :default_env, {
 
 # バージョンが変わっても共通で参照するディレクトリを指定
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
+set :linked_files, fetch(:linked_files, []).push("config/master.key")
 
 set :rbenv_type, :user
 set :rbenv_ruby, '2.5.1'
