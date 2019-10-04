@@ -4,6 +4,13 @@ lock "~> 3.11.2"
 set :application, "footprints"
 set :repo_url, "git@github.com:snarqqq/footprints.git"
 
+set :default_env, {
+  rbenv_root: "/usr/local/rbenv",
+  path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH",
+  AWS_ACCESS_KEY_ID: Rails.application.credentials.aws[:access_key_id],
+  AWS_SECRET_ACCESS_KEY: Rails.application.credentials.aws[:secret_access_key]
+}
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
