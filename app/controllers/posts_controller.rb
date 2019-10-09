@@ -39,7 +39,6 @@ class PostsController < ApplicationController
     @place.save!
     @post = @place.posts.new(post_params)
     @post.save!
-    binding.pry
 
     if params[:images]
       image_params[:image].each do |image|
