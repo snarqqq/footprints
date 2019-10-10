@@ -17,6 +17,7 @@
 
 .main {
   display: flex;
+  justify-content: space-between;
   .map-wrapper {
     margin: 20px 0 0 60px;
   }
@@ -34,6 +35,8 @@
 
 .posts {
   margin-left: 50px;
+  height: calc(100vh - 80px);
+  overflow: scroll;
 }
 
 .form {

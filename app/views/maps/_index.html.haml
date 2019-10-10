@@ -1,4 +1,3 @@
-/ form_withはデフォルトでremote: trueの挙動になります
 = form_with url: map_request_path, method: :post, class: "search_form" do |f|
   = f.text_field :address, placeholder: "Type place", class: "search_box", id: "address-input"
   = f.button 'Search', {id: 'search-submit'}
@@ -6,7 +5,7 @@
 
 :css
   #map{
-    height: 400px;
+    height: 480px;
     width: 900px;
     margin: 20px 0;
   }

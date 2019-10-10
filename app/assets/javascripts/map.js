@@ -131,7 +131,7 @@ const styledMapType = new google.maps.StyledMapType(
 
   map = new google.maps.Map(document.getElementById('map'), {
   center: {lat: 35.6806, lng: 139.769},
-  zoom: 1,
+  zoom: 1.6,
   mapTypeControlOptions: {
     mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
             'styled_map']
@@ -177,6 +177,7 @@ function findPlace(){
         createMarker(results[i]);
       }
       map.setCenter(results[0].geometry.location);
+      map.fitBounds(results[0].geometry.viewport);
       // foundPlaceName = results[0].name;
       // foundGeometry = results[0].geometry.location;
       // foundPlaceId = results[0].place_id;
