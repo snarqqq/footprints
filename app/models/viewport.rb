@@ -1,0 +1,2 @@
+class Viewport < ApplicationRecord
+end

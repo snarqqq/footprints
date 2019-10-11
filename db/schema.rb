@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_16_070605) do
+ActiveRecord::Schema.define(version: 2019_11_01_104843) do
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "image", null: false
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(version: 2019_10_16_070605) do
 
   create_table "places", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "place_id", null: false
-    t.float "lat", null: false
-    t.float "lng", null: false
+    t.decimal "lat", precision: 18, scale: 15, default: "0.0", null: false
+    t.decimal "lng", precision: 18, scale: 15, default: "0.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -53,6 +53,17 @@ ActiveRecord::Schema.define(version: 2019_10_16_070605) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "viewports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", default: 0, null: false
+    t.decimal "sw_lat", precision: 18, scale: 15, default: "0.0", null: false
+    t.decimal "sw_lng", precision: 18, scale: 15, default: "0.0", null: false
+    t.decimal "ne_lat", precision: 18, scale: 15, default: "0.0", null: false
+    t.decimal "ne_lng", precision: 18, scale: 15, default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_viewports_on_user_id"
   end
 
   add_foreign_key "posts", "users"

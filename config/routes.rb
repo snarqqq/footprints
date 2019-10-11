@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :maps, only: [:index, :map]
   # get '/map_request', to: 'posts#map', as: 'map_request'
   post '/map_request', to: 'maps#map', as: 'map_request'
+  post '/save_viewport', to: 'maps#save_viewport', as: 'save_viewport'
 end

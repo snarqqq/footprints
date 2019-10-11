@@ -2,17 +2,21 @@ class MapsController < ApplicationController
   def index
   end
 
-  def map
-    @place = params[:address]
-    results = Geocoder.search(@place)
-    @latlng = results.first.coordinates
-    map = Map.new(place: @place, lat: @latlng[0], lon: @latlng[1])
-    map.save
-
-    respond_to do |format|
-      format.js
-    end
+  def save_viewport
+    
   end
+
+  # def map
+  #   @place = params[:address]
+  #   results = Geocoder.search(@place)
+  #   @latlng = results.first.coordinates
+  #   map = Map.new(place: @place, lat: @latlng[0], lon: @latlng[1])
+  #   map.save
+
+  #   respond_to do |format|
+  #     format.js
+  #   end
+  # end
 
   private
   

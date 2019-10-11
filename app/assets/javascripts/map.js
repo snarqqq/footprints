@@ -192,7 +192,8 @@ function createMarker(place) {
     map: map,
     draggable: true,
     animation: google.maps.Animation.DROP,
-    position: place.geometry.location
+    position: place.geometry.location,
+    zIndex: 10000
   });
 
   let content =`<div>
@@ -214,7 +215,7 @@ function createMarker(place) {
 }
 
 function createMarkerFromDB(place) {
-  let position = {lat: place.lat, lng: place.lng};
+  let position = {lat: Number(place.lat), lng: Number(place.lng)};
   let imageUrl = window.image_path('footprint_marker.png');
   let image = {
     // url: '/assets/footprint_marker.png'
