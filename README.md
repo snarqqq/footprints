@@ -86,13 +86,24 @@ Postモデル内でbodyカラムかimageカラムのどちらかがnullでなけ
 |Column|Type|Options|
 |------|----|-------|
 |place_id|string|null: false|
-|lat|float|null: false|
-|lng|float|null: false|
+|lat|decimal|null: false|
+|lng|decimal|null: false|
 
 ### Association
 - has_many :posts
 
+## viewportsテーブル
 
+|Column|Type|Options|
+|------|----|-------|
+|user_id|references|null: false, foreign_key: true|
+|sw_lat|decimal|null: false|
+|sw_lng|decimal|null: false|
+|ne_lat|decimal|null: false|
+|ne_lng|decimal|null: false|
+
+### Association
+- belongs_to :user
 
 ## commentsテーブル
 

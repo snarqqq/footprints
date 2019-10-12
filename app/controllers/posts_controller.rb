@@ -30,7 +30,6 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    # 修正 lat,lngの小数点が丸められてしまっている
     @place = Place.find_or_initialize_by(place_id: place_params[:place_id])
     @place.lat = place_params[:lat]
     @place.lng = place_params[:lng]

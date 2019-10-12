@@ -1,32 +1,27 @@
-let centerResult;
-let boundsResult;
-
-
 $(document).on('turbolinks:load', function() {
-  $('.keep-this-view').on('click', function() {
+  $('.save-this-view').on('click', function() {
     // centerResult = map.getCenter();
-    boundsResult = map.getBounds();
-    let sw = {
-      lat: boundsResult.oa.g,
-      lng: boundsResult.ae.g
-    };
-
-    let ne = {
-      lat: boundsResult.oa.h,
-      lng: boundsResult.ae.h
-    };
+    let boundsResult = map.getBounds();
+    let sw_lat = boundsResult.oa.g;
+    let sw_lng = boundsResult.ka.g;
+    let ne_lat = boundsResult.oa.h;
+    let ne_lng = boundsResult.ka.h;
+    let csrfToken = $('input[name="authenticity_token"]').val();
 
     $.ajax({
       url: '/save_viewport',
       type: "POST",
       data: {
-        sw: sw,
-        ne: ne
+        sw_lat: sw_lat,
+        sw_lng: sw_lng,
+        ne_lat: ne_lat,
+        ne_lng: ne_lng,
+        authenticity_token: csrfToken
       },
       dataType: 'json',
     })
-    .done(function(post){
-      $('.keep-this-view').text('Done');
+    .done(function(){
+      $('.save-this-view').text('Done');
     })
     .fail(function(){
       alert('error');
@@ -38,18 +33,25 @@ $(document).on('turbolinks:load', function() {
 
 
   $('.set-my-view').on('click', function() {
-    centerResult = map.getCenter();
-    boundsResult = map.getBounds();
-
-
-    // let centerResult = map.getCenter();
-    // let boundsResult = map.getBounds();
-
-    console.log(centerResult);
-    console.log(boundsResult);
-
+    $.ajax({
+      url: '/set_viewport',
+      type: "GET",
+      dataType: 'json',
+    })
+    .done(function(viewport){
     // Numberにする
-    // map.setCenter(results[0].geometry.location);
-    // map.fitBounds(results[0].geometry.viewport);
+    console.log(viewport);
+      let sw = {lat: Number(viewport.sw_lat), lng: Number(viewport.sw_lng)};
+      let ne = {lat: Number(viewport.ne_lat), lng: Number(viewport.ne_lng)};
+      let bounds = new google.maps.LatLngBounds(sw, ne);
+      // map.setCenter(results[0].geometry.location);
+      map.fitBounds(bounds);
+    })
+    .fail(function(){
+      alert('error');
+    })
+    .always(function(){
+    });
+
   });
 });
