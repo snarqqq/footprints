@@ -1,0 +1,17 @@
+.dd-sign-in-wrapper {
+  background-image: url(asset_path("sign_in_bg.jpg"));
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  // background-image: url("sign_in_bg.jpg");
+}
+
+.dd-sign-in-brand {
+  padding-top: 7rem;
+  &__head {
+    font-size: 6rem;
+    letter-spacing: 1rem;
+    font-style: italic;
+  }
+}

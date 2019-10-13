@@ -1,24 +1,56 @@
-#account-page.account-page
-  .account-page__inner.clearfix
-    .account-page__inner--left.account-page__header
-      %h2 Log in
-      %h5 登録しているユーザーでログイン
-      = render "devise/shared/links"
-    .account-page__inner--right.user-form
-      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        .field
-          .field-label
-            = f.label :email
-          .field-input
-            = f.email_field :email, autofocus: true
-          .field
-            .field-label
-              = f.label :password
-              %i (英数字8文字以上)
-            .field-input
-              = f.password_field :password, autocomplete: "off"
-          .actions
-            = f.submit "Log in", class: 'btn'
+-# #account-page.account-page
+-#   .account-page__inner.clearfix
+-#     .account-page__inner--left.account-page__header
+-#       %h2 Log in
+-#       %h5 登録しているユーザーでログイン
+-#       = render "devise/shared/links"
+-#     .account-page__inner--right.user-form
+-#       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+-#         .field
+-#           .field-label
+-#             = f.label :email
+-#           .field-input
+-#             = f.email_field :email, autofocus: true
+-#           .field
+-#             .field-label
+-#               = f.label :password
+-#               %i (英数字8文字以上)
+-#             .field-input
+-#               = f.password_field :password, autocomplete: "off"
+-#           .actions
+-#             = f.submit "Log in", class: 'btn'
 
-.container-fluid
-  
+.dd-sign-in-wrapper
+  .container
+    .dd-sign-in-brand.row.justify-content-center
+      %h1.dd-sign-in-brand__head.text-white.border-white.rounded Footprints
+    .dd-sign-in-desc.row.justify-content-center
+      %h3.dd-sign-in-desc__text.text-white Log your journey
+
+    .dd-sign-in-button.row.justify-content-center.mt-5
+      %button.col-2.btn.btn-success{"data-toggle": "modal", "data-target": "#signinModal"} サインイン
+
+    #signinModal.modal
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %h5.modal-title サインイン
+            %button.close{"data-dismiss": "modal"} &times;
+          .modal-body
+            = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+              .form-group
+                .field-label
+                  = f.label :email
+                .field-input
+                  = f.email_field :email, autofocus: true, class: "form-control"
+                .form-group
+                  .field-label
+                    = f.label :password
+                    %i (英数字8文字以上)
+                  .field-input
+                    = f.password_field :password, autocomplete: "off", class: "form-control"
+                .modal-footer
+                  = f.submit "Log in", class: 'btn btn-success'
+
+    .dd-sign-in-new-user.row.justify-content-center.mt-2
+      %button.col-2.btn.btn-info 新規登録
