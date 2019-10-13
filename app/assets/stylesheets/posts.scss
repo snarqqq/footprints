@@ -1,9 +1,9 @@
-.header {
-  height: 80px;
-  width: 100%;
+.my-navbar {
+  // height: 80px;
+  // width: 100%;
   background-color: #444;
-  display: flex;
-  justify-content: space-between;
+  // display: flex;
+  // justify-content: space-between;
   // border-bottom: 5px solid black;
   &__lists {
     display: flex;
@@ -14,6 +14,9 @@
     font-style: italic;
     margin-left: 20px;
     display: flex;
+  }
+  &__head {
+    color: white;
   }
 }
 

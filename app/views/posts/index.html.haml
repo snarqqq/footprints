@@ -1,33 +1,53 @@
-.wrapper
+.post-index-wrapper
 
-  %header.header
-    .header__leftbox
-      = image_tag 'apple-touch-icon-180x180.png', alt: 'img', height: '50px', width: '50px', class: 'icon'
-      %h1 Footprints
+  -# %header.header.row.align-items-center
+  -#   .container-fluid.row.justify-content-between.align-items-center
+  -#     .header__leftbox.col-3  
+  -#       = image_tag 'apple-touch-icon-180x180.png', alt: 'img', height: '50px', width: '50px', class: 'icon'
+  -#       %h1.ml-3 Footprints
+      
+  -#     .header__rightbox.col-1
+  -#       %ul.header__lists
+  -#         %li.username
+  -#           = current_user.name
+  -#         %li.userpage
+  -#           = link_to edit_user_path(current_user) do
+  -#             = fa_icon 'cog', class: 'icon'
+  -#         %li.newpost
+  -#           = link_to 'New Post', new_post_path
     
-    .header__rightbox
-      %ul.header__lists
-        %li.username
-          = current_user.name
-        %li.userpage
-          = link_to edit_user_path(current_user) do
-            = fa_icon 'cog', class: 'icon'
-        %li.newpost
-          = link_to 'New Post', new_post_path
-    
+  %nav.my-navbar.navbar.navbar-expand-sm
+    .container-fluid
+      .my-navbar__leftbox.navbar-brand
+        = link_to root_path, class:'row' do
+          = image_tag 'apple-touch-icon-180x180.png', alt: 'img', height: '50px', width: '50px', class: 'icon'
+          %h1.my-navbar__head.ml-3 Footprints
+      
+      .my-navbar__rightbox.col-2
+        %ul.my-navbar__lists.navbar-nav
+          %li.username.nav-item
+            = current_user.name
+          %li.userpage.nav-item
+            = link_to edit_user_path(current_user) do
+              = fa_icon 'cog', class: 'icon'
+          %li.newpost.nav-item
+            = link_to 'New Post', new_post_path
+          %li.logout.nav-item
+            = link_to 'Log Out', destroy_user_session_path, method: :delete, class:'log-out__btn'
+
   %main.main
     .map-wrapper
       = render 'maps/index'
-      .form
-        = form_with model: @post , class: 'form__box' do |f|
-          .form__input-box
-            = f.text_field :body, class: 'form__message', placeholder: 'Write down your experience'
-            .form__mask
-              = f.label :image, class: 'form__mask-image' do
-                = fa_icon 'picture-o', class: 'icon'
-                = f.file_field :image, class: 'hidden'
-          .send-btn
-            = f.submit 'Post', class: 'form__button'
+      -# .form
+      -#   = form_with model: @post , class: 'form__box' do |f|
+      -#     .form__input-box
+      -#       = f.text_field :body, class: 'form__message', placeholder: 'Write down your experience'
+      -#       .form__mask
+      -#         = f.label :image, class: 'form__mask-image' do
+      -#           = fa_icon 'picture-o', class: 'icon'
+      -#           = f.file_field :image, class: 'hidden'
+      -#     .send-btn
+      -#       = f.submit 'Post', class: 'form__button'
       
     .posts
       = render @posts
