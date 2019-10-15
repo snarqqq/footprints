@@ -2,6 +2,8 @@
   .post__upper-info
     .post__user-name
       = post.user.name
+    .post__place-name
+      = post.place_name
     .post__date
       = post.created_at.strftime("%Y/%m/%d %H:%M")
   .post__body

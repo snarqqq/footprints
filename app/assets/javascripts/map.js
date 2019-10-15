@@ -231,10 +231,15 @@ function createMarkerFromDB(place) {
     position: position
   });
 
+  let imageHtml = place.images[0] === undefined ? "" : `<img src="${place.images[0].image.url}" class="lower-message__image">`;
   let content =`<div>
-                ${place.place_name}
-                <h2>ここを訪れました。</h2>
-                <a class="newpost-link" href=''>ここに投稿</a>
+                  ${place.place_name}
+                  ${place.title}
+                  ${place.visit_date}
+                  ${place.body}
+                  <h2>ここを訪れました。</h2>
+                  <div>${imageHtml}</div>
+                  <a class="newpost-link" href=''>ここに投稿</a>
                 </div>`
 
   google.maps.event.addListener(marker, 'click', function() {
