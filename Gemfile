@@ -81,3 +81,5 @@ gem 'mini_magick'
 gem 'fog-aws'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.3.1'
+# Security againgst Dos
+gem 'rack-attack'
