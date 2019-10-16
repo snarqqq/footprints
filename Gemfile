@@ -81,5 +81,3 @@ gem 'mini_magick'
 gem 'fog-aws'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.3.1'
-
-gem 'geocoder'
