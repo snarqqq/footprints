@@ -241,7 +241,7 @@ function createMarkerFromDB(place) {
                   ${place.body}
                   <h2>ここを訪れました。</h2>
                   <div>${imageHtml}</div>
-                  <a class="newpost-link" href=''>ここに投稿</a>
+                  <button class="btn btn-info" id="newPostBtn" data-toggle="modal" data-target="#newPostModal">ここに投稿</button>
                 </div>`
 
   google.maps.event.addListener(marker, 'click', function() {
