@@ -1,8 +1,9 @@
 $(document).on('turbolinks:load', function() {
-  // 新規ポストモーダルの場所名書き換え
+  // 新規ポストモーダルのフォーム内容リセット、場所名書き換え
   $(document).on('click', '#newPostBtn', function() {
+    let placeName = clickPlace.name !== undefined ? clickPlace.name : clickPlace.place_name;
     clearNewPostForm();
-    $('#newPostModalTitle').text(clickPlace.name);
+    $('#newPostModalTitle').text(placeName);
   });
 
   // ajaxでポスト
