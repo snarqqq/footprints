@@ -1,18 +1,11 @@
 $(document).on('turbolinks:load', function() {
-  // モーダルフォームの表示
-  $(document).on('click', '.newpost-link', function() {
-    let placeName = (clickPlace.name) ? clickPlace.name : clickPlace.place_name;
-    $('.newpost-form__head').text(`${placeName}`);
-    $('.newpost-modal-wrapper').fadeIn();
-    return false;
+  // 新規ポストモーダルの場所名書き換え
+  $(document).on('click', '#newPostBtn', function() {
+    clearNewPostForm();
+    $('#newPostModalTitle').text(clickPlace.name);
   });
 
-  // モーダルフォームの非表示
-  $(document).on('click', '.newpost-modal__close', function() {
-    $('.newpost-modal-wrapper').fadeOut();
-    return false;
-  });
-
+  // ajaxでポスト
   $('#newpost-form__form').on('submit', function(e){
     e.preventDefault();
     let formData = new FormData(this);
@@ -42,8 +35,7 @@ $(document).on('turbolinks:load', function() {
       contentType: false
     })
     .done(function(post){
-      $('.newpost-modal-wrapper').fadeOut();
-
+      $('#newPostModalClose').trigger('click');
       // フォームを初期化するコード
 
       infowindow.close();
@@ -54,9 +46,20 @@ $(document).on('turbolinks:load', function() {
     .fail(function(){
       alert('error');
     })
-    .always(function(){
+    .always(function(post){
+      console.log(post);
+      console.log(post.place_name);
     })
 
   });
 
 });
+
+function clearNewPostForm() {
+  $('#newPostFormTitle').val('');
+  $('#newPostFormVisitDate').val('');
+  // HTMLにidを指定するとファイルインプットが機能しなくなった
+  $('.newPostFormImages').val(null);
+  $('#newPostFormBody').val('');
+  $('#newPostFormSubmit').prop( "disabled", false );
+}

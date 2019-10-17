@@ -33,8 +33,6 @@ class PostsController < ApplicationController
     @place = Place.find_or_initialize_by(place_id: place_params[:place_id])
     @place.lat = place_params[:lat]
     @place.lng = place_params[:lng]
-    # @place = Place.where(place_id: place_params[:place_id], lat: place_params[:lat], lng: place_params[:lng]).first_or_initialize
-    # @post = Post.new(post_params)
     @place.save!
     @post = @place.posts.new(post_params)
     @post.save!

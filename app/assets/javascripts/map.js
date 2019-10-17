@@ -182,6 +182,8 @@ function findPlace(){
       // foundGeometry = results[0].geometry.location;
       // foundPlaceId = results[0].place_id;
       // foundIcon = results[0].icon;
+    } else {
+      alert(`"${inputAddress}"に対する検索結果は見つかりませんでした。\n他のキーワードで再度お試しください。`)
     }
   });
 
@@ -198,7 +200,7 @@ function createMarker(place) {
 
   let content =`<div>
                 ${place.name}
-                <a class="newpost-link" href=''>ここに投稿</a>
+                <button class="btn btn-info" id="newPostBtn" data-toggle="modal" data-target="#newPostModal">ここに投稿</button>
                 </div>`
 
   google.maps.event.addListener(marker, 'click', function() {
