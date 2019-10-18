@@ -50,7 +50,7 @@ $(document).on('turbolinks:load', function() {
     .always(function(post){
       console.log(post);
       console.log(post.place_name);
-    })
+    });
 
   });
 

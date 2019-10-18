@@ -2,9 +2,9 @@ $(document).on('turbolinks:load', function() {
   $('.save-this-view').on('click', function() {
     // centerResult = map.getCenter();
     let boundsResult = map.getBounds();
-    let sw_lat = boundsResult.oa.g;
+    let sw_lat = boundsResult.pa.g;
     let sw_lng = boundsResult.ka.g;
-    let ne_lat = boundsResult.oa.h;
+    let ne_lat = boundsResult.pa.h;
     let ne_lng = boundsResult.ka.h;
     let csrfToken = $('input[name="authenticity_token"]').val();
 
