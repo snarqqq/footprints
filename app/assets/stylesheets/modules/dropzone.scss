@@ -386,3 +386,22 @@
         border-left: 6px solid transparent;
         border-right: 6px solid transparent;
         border-bottom: 6px solid #be2626; }
+
+        .dropzone-previews {
+          max-width: 100%;
+          display: flex;
+          flex-wrap:wrap;
+        }
+        .dz-details {
+          display: none;
+        }
+        .dz-success-mark {
+          display: none;
+        }
+        .dz-error-mark {
+          display: none;
+        }
+        
+        .dz-preview.dz-image-preview {
+          width: 33%;
+        }

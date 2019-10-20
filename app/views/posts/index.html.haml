@@ -49,20 +49,31 @@
             .field-label
               = f.label :title, "タイトル"
             .field-input
-              = f.text_field :title, placeholder: "タイトル（必須40文字まで）", value: "", class: "form-control"
+              = f.text_field :title, placeholder: "タイトル（40文字まで）", value: "", class: "form-control"
           .form-group
             .field-label
               = f.label :visit_date, "訪問日"
             .field-input
               = f.date_field :visit_date, class: "form-control", id: "newPostFormVisitDate"
           .form-group
-            = f.fields_for :images do |fin|
-              = fin.label :image, "写真" do
-                .item-registration__form__group__image{id: 'file-drop-area'}
-                  .nest-form__head
-                    = fin.file_field :image, multiple: true, name: 'images[image][]', style:"display:none;", class: "form-control newPostFormImages"
-                    %p ドラッグアンドドロップ
-                    %p またはクリックしてファイルをアップロード
+            %h6 写真
+            #file-drop-area
+              %p#newpost-modal__image-text.newpost-modal__image-text.text-center.text-muted
+                ドラッグ&ドロップ
+                %br
+                またはクリックして画像をアップロード
+              .dropzone-previews
+
+            -# = f.fields_for :images do |fin|
+            -#   = fin.label :image, "写真" do
+            -#     .item-registration__form__group__image{id: 'file-drop-area'}
+            -#       .nest-form__head
+            -#         = fin.file_field :image, multiple: true, name: 'images[image][]', style:"display:none;", class: "form-control newPostFormImages"
+            -#         %p ドラッグアンドドロップ
+            -#         %p またはクリックしてファイルをアップロード
+
+
+
           .form-group
             .field-label
               = f.label :body, "本文"
