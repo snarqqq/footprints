@@ -1,7 +1,9 @@
+let myDropzone;
+
 $(function(){
   Dropzone.autoDiscover = false;
-  let myDropzone = new Dropzone("#file-drop-area", {
-    url: "/items",
+    myDropzone = new Dropzone("#file-drop-area", {
+    url: "/posts",
     uploadMultiple: true,
     parallelUploads: 10,
     paramName: "images[image]",
@@ -9,7 +11,6 @@ $(function(){
     previewsContainer: '.dropzone-previews',
     addRemoveLinks: true,
     dictRemoveFile: "削除",
-    headers: {"Accept": "text/javascript"},
     dictMaxFilesExceeded: "10 files limit",
     dictInvalidFileType: "Image file only",
     autoProcessQueue: false

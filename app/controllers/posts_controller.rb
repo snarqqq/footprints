@@ -38,9 +38,13 @@ class PostsController < ApplicationController
     @post.save!
 
     if params[:images]
-      image_params[:image].each do |image|
+      # image_params[:image].each do |image|
+      #   @post.images.create(image: image, post_id: @post.id)
+      # end
+      image_params[:image].each do |num, image|
         @post.images.create(image: image, post_id: @post.id)
       end
+
     end
 
     respond_to do |format|
@@ -96,8 +100,8 @@ class PostsController < ApplicationController
     end
 
     def image_params
-      params.require(:images)
-      # params.require(:images).permit({image: {}})
+      # params.require(:images)
+      params.require(:images).permit({image: {}})
     end
 
 
