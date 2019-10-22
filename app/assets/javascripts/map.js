@@ -3,7 +3,6 @@ $(document).on('turbolinks:load', function() {
   $('#search-submit').on('click', function(e) {
     e.preventDefault();
     ($('#address-input').val() === "") ? alert('場所を入力してください') : findPlace();
-    // findPlace();
   });
 
 });
@@ -164,7 +163,7 @@ function findPlace(){
 
   let request = {
     query: inputAddress,
-    fields: ['name', 'geometry','place_id','icon'],
+    fields: ['name', 'geometry','place_id','formatted_address', 'icon'],
   };
 
   let service = new google.maps.places.PlacesService(map);
@@ -199,7 +198,8 @@ function createMarker(place) {
   });
 
   let content =`<div>
-                ${place.name}
+                <h5>${place.name}</h5>
+                <p>${place.formatted_address}</p>
                 <button class="btn btn-info" id="newPostBtn" data-toggle="modal" data-target="#newPostModal">ここに投稿</button>
                 </div>`
 
@@ -235,12 +235,14 @@ function createMarkerFromDB(place) {
 
   let imageHtml = place.images[0] === undefined ? "" : `<img src="${place.images[0].image.url}" class="lower-message__image">`;
   let content =`<div>
-                  ${place.place_name}
-                  ${place.title}
-                  ${place.visit_date}
-                  ${place.body}
-                  <h2>ここを訪れました。</h2>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h5>${place.place_name}</h5>
+                    <p class="align-self-end">${place.visit_date}</p>
+                  </div>
+                  <h6>${place.title}</h6>
+                  <p>${place.body}</p>
                   <div>${imageHtml}</div>
+                  <button class="btn btn-warning" id="newPostBtn" data-toggle="modal" data-target="#newPostModal">詳細</button>
                   <button class="btn btn-info" id="newPostBtn" data-toggle="modal" data-target="#newPostModal">ここに投稿</button>
                 </div>`
 
@@ -290,7 +292,7 @@ function createFootprints() {
     // });
 
     for (var i = 0; i < filteredPosts.length; i++) {
-      addMarkerWithTimeout(filteredPosts[i], i * 100);
+      addMarkerWithTimeout(filteredPosts[i], i * 50);
     }
 
   })
