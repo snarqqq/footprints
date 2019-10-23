@@ -78,4 +78,41 @@
             .field-input
               = f.text_area :body, placeholder: "本文を入力", class: "form-control", id: "newPostFormBody"
           .modal-footer
-            = f.submit "投稿する", { id: 'newPostFormSubmit', data: {disable_with: false}}
+            = f.submit "投稿する", { id: 'newPostFormSubmit', class: "btn btn-warning", data: {disable_with: false}}
+
+#postShowModal.modal
+  .modal-dialog
+    #postShowModalContent.modal-content
+      -# .modal-header
+      -#   %h5.modal-title{id: "postShowModalTitle"}
+      -#     = @post.title
+      -#   %button.close{id: "postShowModalClose", "data-dismiss": "modal"} &times;
+      -# .modal-body
+
+      -#   = form_with model: @post, class:'newpost-form__form', id: 'newpost-form__form', local: true do |f|
+      -#     .form-group
+      -#       .field-label
+      -#         = f.label :title, "タイトル"
+      -#       .field-input
+      -#         = f.text_field :title, placeholder: "タイトル（40文字まで）", value: "", class: "form-control"
+      -#     .form-group
+      -#       .field-label
+      -#         = f.label :visit_date, "訪問日"
+      -#       .field-input
+      -#         = f.date_field :visit_date, class: "form-control", id: "newPostFormVisitDate"
+      -#     .form-group
+      -#       %h6 写真
+      -#       #file-drop-area
+      -#         %p#newpost-modal__image-text.newpost-modal__image-text.text-center.text-muted
+      -#           ドラッグ&ドロップ
+      -#           %br
+      -#           またはクリックして画像をアップロード
+      -#         .dropzone-previews
+      -#     .form-group
+      -#       .field-label
+      -#         = f.label :body, "本文"
+      -#       .field-input
+      -#         = f.text_area :body, placeholder: "本文を入力", class: "form-control", id: "newPostFormBody"
+
+      -#     .modal-footer
+      -#       = f.submit "投稿する", { id: 'newPostFormSubmit', class: "btn btn-warning", data: {disable_with: false}}

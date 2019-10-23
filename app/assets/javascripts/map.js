@@ -242,7 +242,8 @@ function createMarkerFromDB(place) {
                   <h6>${place.title}</h6>
                   <p>${place.body}</p>
                   <div>${imageHtml}</div>
-                  <button class="btn btn-warning" id="newPostBtn" data-toggle="modal" data-target="#newPostModal">詳細</button>
+                  <p>他何枚の写真</p>
+                  <button class="btn btn-warning" id="postShowBtn" data-toggle="modal" data-target="#postShowModal">詳細</button>
                   <button class="btn btn-info" id="newPostBtn" data-toggle="modal" data-target="#newPostModal">ここに投稿</button>
                 </div>`
 

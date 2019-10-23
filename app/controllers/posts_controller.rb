@@ -16,6 +16,8 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post = Post.find(params[:id])
+    render 'show.js.erb'
   end
 
   # GET /posts/new
@@ -75,11 +77,13 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    @post.destroy
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @other_posts_judge = Post.where(place_id: @post.place_id).length
+    @post.destroy if @post.user_id == current_user.id
+    render 'destroy .js.erb'
+    # respond_to do |format|
+    #   format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+    #   format.json { head :no_content }
+    # end
   end
 
   private
