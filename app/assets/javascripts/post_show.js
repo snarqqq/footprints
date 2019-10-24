@@ -8,6 +8,7 @@ $(document).on('turbolinks:load', function() {
       dataType: 'script'
     })
     .done(function(){
+      // 'destroy.js.erb'をrender
     })
     .fail(function(){
       alert('詳細情報を取得できませんでした');

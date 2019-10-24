@@ -79,7 +79,7 @@ class PostsController < ApplicationController
   def destroy
     @other_posts_judge = Post.where(place_id: @post.place_id).length
     @post.destroy if @post.user_id == current_user.id
-    render 'destroy .js.erb'
+    render 'destroy.js.erb'
     # respond_to do |format|
     #   format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
     #   format.json { head :no_content }
