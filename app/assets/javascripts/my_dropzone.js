@@ -1,12 +1,12 @@
 let myDropzone;
 
-$(function(){
+function initDropzone(url, method) {
   console.log(window.location.href);
   if ($("#file-drop-area")[0] !== undefined){
-  console.log('working');
     Dropzone.autoDiscover = false;
     myDropzone = new Dropzone("#file-drop-area", {
-      url: "/posts",
+      method: method,
+      url: url,
       uploadMultiple: true,
       parallelUploads: 10,
       paramName: "images[image]",
@@ -31,4 +31,4 @@ $(function(){
 
   };
 
-});
+}

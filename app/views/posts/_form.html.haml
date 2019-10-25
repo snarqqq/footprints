@@ -1,19 +1,49 @@
-= form_for @post do |f|
-  - if @post.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
-      %ul
-        - @post.errors.full_messages.each do |message|
-          %li= message
+.modal-header
+  %h5.modal-title{id: "newPostModalTitle"}
+    投稿内容を入力してください
+  %button.close{id: "newPostModalClose", "data-dismiss": "modal"} &times;
+.modal-body
+  = form_with model: @post, class:'newpost-form__form', id: "post-#{action_name}-form", local: true do |f|
+    .form-group
+      .field-label
+        = f.label :title, "タイトル"
+      .field-input
+        = f.text_field :title, placeholder: "タイトル（40文字まで）", class: "form-control"
+    .form-group
+      .field-label
+        = f.label :visit_date, "訪問日"
+      .field-input
+        = f.date_field :visit_date, class: "form-control", id: "newPostFormVisitDate"
+    .form-group
+      %h6 写真
+      #file-drop-area
+        %p#newpost-modal__image-text.newpost-modal__image-text.text-center.text-muted
+          ドラッグ&ドロップ
+          %br
+          またはクリックして画像をアップロード
+        .dropzone-previews
+          - if post.images != []
+            - post.images.each do |image|
+              .dz-preview.dz-image-preview
+                .dz-image
+                  = image_tag image.image_url, size: "120x120", class: "post-edit-image"
+                %a.edit-image-remove.dz-remove{href: "#", "data-image-remove": "#{image.id}"} 削除
+      -# = f.fields_for :images do |fin|
+      -#   = fin.label :image, "写真" do
+      -#     .item-registration__form__group__image{id: 'file-drop-area'}
+      -#       .nest-form__head
+      -#         = fin.file_field :image, multiple: true, name: 'images[image][]', style:"display:none;", class: "form-control newPostFormImages"
+      -#         %p ドラッグアンドドロップ
+      -#         %p またはクリックしてファイルをアップロード
 
-  .contents.row
-    .container
-      = form_tag('/posts', method: :post) do
-        %h3
-          投稿する
-
-        = f.text_field :body, class: 'form__message', placeholder: 'type a message'
-        = f.file_field :image
-
-        .actions
-          = f.submit 'Send', class: 'form__button'
+    .form-group
+      .field-label
+        = f.label :body, "本文"
+      .field-input
+        = f.text_area :body, placeholder: "本文を入力", class: "form-control", id: "newPostFormBody"
+    .modal-footer
+      = "#{action_name}"
+      - if action_name == 'edit'
+        = f.submit "保存", {id: "editPostFormSubmit", class: "btn btn-warning"}
+      - else
+        = f.submit "投稿", { id: 'newPostFormSubmit', class: "btn btn-warning", data: {disable_with: false}}

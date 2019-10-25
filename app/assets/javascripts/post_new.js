@@ -2,17 +2,30 @@ $(document).on('turbolinks:load', function() {
   // 新規ポストモーダルのフォーム内容リセット、場所名書き換え
   $(document).on('click', '#newPostBtn', function() {
     let placeName = clickPlace.name !== undefined ? clickPlace.name : clickPlace.place_name;
-    clearNewPostForm();
+    // clearNewPostForm();
     $('#newPostModalTitle').text(placeName);
+    $.ajax({
+      url: "/posts/new",
+      type: "GET",
+      dataType: 'script'
+    })
+    .done(function(){
+      // 'new.js.erb'をrender
+    })
+    .fail(function(){
+      alert('error_posts#new');
+    })
+    .always(function(){
+    });
   });
 
   // テキストをクリックしてもアップローダーが反応するように
-  $('#newpost-modal__image-text').on('click', function() {
+  $(document).on('click', '#newpost-modal__image-text', function() {
     $('#file-drop-area').trigger('click');
   });
 
   // submitで写真の有無で分岐
-  $('#newpost-form__form').on('submit', function(e){
+  $(document).on('submit', '#post-new-form',function(e){
     e.preventDefault();
     if ($('.dropzone-previews').children().length !== 0) {
       let formDataAry = $(this).serializeArray();

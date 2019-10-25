@@ -1,8 +1,10 @@
 .modal-header
   %h5.modal-title{id: "postShowModalTitle"}
-    = post.title
+    = post.place_name
   %button.close{id: "postShowModalClose", "data-dismiss": "modal"} &times;
 .modal-body
+  %p
+    = post.title
   %p
     = post.user.name
   %p
@@ -15,5 +17,6 @@
   .modal-footer
     = link_to post_path(post), method: :delete, remote: true, class:"" do
       .btn.btn-danger 削除
-    .btn.btn-warning 編集
-    -# = f.submit "投稿する", { id: 'newPostFormSubmit', class: "btn btn-warning", data: {disable_with: false}}
+    = link_to edit_post_path(post),remote: true, class: "edit-link", data: {"turbolinks": false} do
+      .btn.btn-warning 編集
+    #postEditBtn.d-none{"data-toggle": "modal", "data-target": "#newPostModal"}

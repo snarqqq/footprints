@@ -23,10 +23,12 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    render 'new.js.erb'
   end
 
   # GET /posts/1/edit
   def edit
+    render 'edit.js.erb'
   end
 
   # POST /posts
@@ -65,8 +67,9 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
+        # format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        # format.json { render :show, status: :ok, location: @post }
+        format.js { render 'update.js.erb' }
       else
         format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -97,6 +100,10 @@ class PostsController < ApplicationController
       place_name = params.require(:place_name)
       # params.require(:post).permit(:title, :visit_date, :body).merge(user_id: current_user.id, place_name: place_name)
       params.permit(:title, :visit_date, :body).merge(user_id: current_user.id, place_name: place_name)
+    end
+
+    def post_update_params
+      params.require(:post).permit(:title, :visit_date, :body)
     end
 
     def place_params

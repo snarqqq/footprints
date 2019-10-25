@@ -1,0 +1,11 @@
+(function() {
+  $('#postShowModalClose').trigger('click');
+  $('#postEditBtn').trigger('click');
+  $('#newPostModalContent').empty();
+  $('#newPostModalContent').append("<%= j(render partial: 'posts/form', locals: {post: @post}) %>");
+  let placeName = clickPlace.name !== undefined ? clickPlace.name : clickPlace.place_name;
+  $('#newPostModalTitle').text(placeName);
+  let url = "/posts/#{@post.id}";
+  let method =  'patch'
+  initDropzone(url, method);
+}());
