@@ -33,6 +33,7 @@ $(document).on('turbolinks:load', function() {
       });
     } else {
       console.log('not using dropzone');
+      console.log(imageRemoveIds);
       let formData = new FormData(this);
       formData.append('post_id', clickPlace.post_id);
       formData.append('place_name', clickPlace.place_name);

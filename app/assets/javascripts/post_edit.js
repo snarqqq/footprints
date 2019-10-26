@@ -4,7 +4,7 @@ $(document).on('turbolinks:load', function() {
   $(document).on('click', '.edit-image-remove', function(e) {
     e.preventDefault();
     $(this).parent().remove();
-    let id = $(this).attr("data-image-remove");
+    let id = Number($(this).attr("data-image-remove"));
     imageRemoveIds.push(id);
     return false
   });

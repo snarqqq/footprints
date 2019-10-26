@@ -65,16 +65,26 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        # format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        # format.json { render :show, status: :ok, location: @post }
-        format.js { render 'update.js.erb' }
-      else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+    @post.update!(post_params)
+
+    if image_remove_params != ""
+      imageRemoveIds = image_remove_params.split(",").map{|x| x.to_i}
+      remove_images = Image.where(id: params[:imageRemoveIds])
+      remove_images.each do |image|
+        image.destroy
       end
     end
+    render 'update.js.erb'
+    # respond_to do |format|
+    #   if @post.update(post_params)
+    #     # format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+    #     # format.json { render :show, status: :ok, location: @post }
+    #     format.js { render 'update.js.erb' }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @post.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /posts/1
@@ -111,5 +121,8 @@ class PostsController < ApplicationController
       params.require(:images).permit({image: {}})
     end
 
+    def image_remove_params
+      params.permit(:imageRemoveIds)[:imageRemoveIds]
+    end
 
 end
