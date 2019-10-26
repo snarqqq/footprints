@@ -98,8 +98,8 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       place_name = params.require(:place_name)
-      # params.require(:post).permit(:title, :visit_date, :body).merge(user_id: current_user.id, place_name: place_name)
-      params.permit(:title, :visit_date, :body).merge(user_id: current_user.id, place_name: place_name)
+      params.require(:post).permit(:title, :visit_date, :body).merge(user_id: current_user.id, place_name: place_name)
+      # params.permit(:title, :visit_date, :body).merge(user_id: current_user.id, place_name: place_name)
     end
 
     def post_update_params

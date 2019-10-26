@@ -1,3 +1,4 @@
+json.post_id @post.id
 json.place_name @post.place_name
 json.title @post.title
 json.visit_date @post.visit_date.strftime("%Y/%m/%d")
