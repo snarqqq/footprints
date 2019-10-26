@@ -102,10 +102,6 @@ class PostsController < ApplicationController
       # params.permit(:title, :visit_date, :body).merge(user_id: current_user.id, place_name: place_name)
     end
 
-    def post_update_params
-      params.require(:post).permit(:title, :visit_date, :body)
-    end
-
     def place_params
       params.permit(:place_id, :lat, :lng)
     end
