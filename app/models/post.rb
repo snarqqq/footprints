@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
-  mount_uploader :image, ImageUploader
-  validates :body, presence: true, unless: :image?
+  belongs_to :place
+  has_many :images, dependent: :destroy
+  # accepts_nested_attributes_for :images
+  validates :body, presence: true
 end

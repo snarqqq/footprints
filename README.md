@@ -32,11 +32,11 @@ Things you may want to cover:
 |------|----|-------|
 |email|string|null: false|
 |password|string|null: false|
-|username|string|null: false|
+|name|string|null: false|
 
 usernameカラムにindexを貼る
 ```
-add_index :users,  :username
+add_index :users,  :name
 ```
 
 ### Association
@@ -48,11 +48,16 @@ add_index :users,  :username
 
 |Column|Type|Options|
 |------|----|-------|
+|place_name|string|null: false|
+|title|string||
+|visit_date|date||
 |body|text||
-|image|string||
+|place_id|references|null: false, foreign_key: true|
 |user_id|references|null: false, foreign_key: true|
+<!-- |image|string|| -->
+<!-- |map_id|references|null: false, foreign_key: true| -->
 
-Messageモデル内でbodyカラムかimageカラムのどちらかがnullでなければ良いバリデーション
+Postモデル内でbodyカラムかimageカラムのどちらかがnullでなければ良いバリデーション
 ```
   validates :body_or_image, presence: true
 
@@ -65,6 +70,28 @@ Messageモデル内でbodyカラムかimageカラムのどちらかがnullでな
 ### Association
 - belongs_to :user
 - has_many :comments
+- belongs_to :map
+
+## imagesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|image|string||
+|post_id|references|null: false, foreign_key: true|
+
+### Association
+- belongs_to :post
+
+## placesテーブル
+
+|Column|Type|Options|
+|------|----|-------|
+|place_id|string|null: false|
+|lat|float|null: false|
+|lng|float|null: false|
+
+### Association
+- has_many :posts
+
 
 
 ## commentsテーブル

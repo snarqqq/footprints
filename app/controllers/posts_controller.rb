@@ -4,7 +4,14 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = current_user.posts.includes(:place)
+
+    # @places = current_user.places.includes(:posts where ~~~)
+
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   # GET /posts/1
@@ -24,12 +31,27 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    # 修正 lat,lngの小数点が丸められてしまっている
+    @place = Place.find_or_initialize_by(place_id: place_params[:place_id])
+    @place.lat = place_params[:lat]
+    @place.lng = place_params[:lng]
+    # @place = Place.where(place_id: place_params[:place_id], lat: place_params[:lat], lng: place_params[:lng]).first_or_initialize
+    # @post = Post.new(post_params)
+    @place.save!
+    @post = @place.posts.new(post_params)
+    @post.save!
+    binding.pry
+
+    if params[:images]
+      image_params[:image].each do |image|
+        @post.images.create(image: image, post_id: @post.id)
+      end
+    end
 
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
+        format.json
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -69,6 +91,19 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:body, :image).merge(user_id: current_user.id)
+      place_name = params.require(:place_name)
+      # params.require(:post).permit(:title, :visit_date, :body).merge(user_id: current_user.id, place_name: place_name)
+      params.permit(:title, :visit_date, :body).merge(user_id: current_user.id, place_name: place_name)
     end
+
+    def place_params
+      params.permit(:place_id, :lat, :lng)
+    end
+
+    def image_params
+      params.require(:images)
+      # params.require(:images).permit({image: {}})
+    end
+
+
 end
