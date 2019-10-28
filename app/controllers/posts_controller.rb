@@ -74,6 +74,12 @@ class PostsController < ApplicationController
         image.destroy
       end
     end
+
+    if params[:images]
+      image_params[:image].each do |num, image|
+        @post.images.create(image: image, post_id: @post.id)
+      end
+    end
     render 'update.js.erb'
     # respond_to do |format|
     #   if @post.update(post_params)

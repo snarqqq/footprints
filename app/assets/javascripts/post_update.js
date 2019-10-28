@@ -21,9 +21,10 @@ $(document).on('turbolinks:load', function() {
 
       myDropzone.on("success", function(file, response) {
         $('#newPostModalClose').trigger('click');
-        infowindow.close();
-        deleteMarkers();
-        createMarkerFromDB(response);
+        eval(response);
+        // infowindow.close();
+        // deleteMarkers();
+        // createMarkerFromDB(response);
       });
       myDropzone.on("error", function(file, response) {
         alert('error');
