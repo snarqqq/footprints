@@ -11,6 +11,10 @@
         1,
         1,
         1,
+        null,
+        1,
+        1,
+        null,
         null
       ],
       "/Users/deltayu/projects/footprints/app/models/application_record.rb": [
@@ -359,6 +363,6 @@
         0
       ]
     },
-    "timestamp": 1573542398
+    "timestamp": 1573543192
   }
 }
