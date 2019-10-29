@@ -41,6 +41,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rails-env-credentials'
   gem 'rspec-rails'
+  gem 'simplecov'
 
   gem 'capistrano'
   gem 'capistrano-rbenv'
