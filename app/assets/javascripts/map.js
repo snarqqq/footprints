@@ -97,6 +97,7 @@ function createMarkerFromDB(place) {
   });
 
   let imageHtml = place.images[0] === undefined ? "" : `<img src="${place.images[0].image.url}" class="lower-message__image">`;
+  let otherImages = place.images.length > 1 ? `<p>他${place.images.length - 1}枚の写真</p>` : "";
   let content =`<div>
                   <div class="d-flex justify-content-between align-items-center">
                     <h5>${place.place_name}</h5>
@@ -105,7 +106,7 @@ function createMarkerFromDB(place) {
                   <h6>${place.title}</h6>
                   <p>${place.body}</p>
                   <div>${imageHtml}</div>
-                  <p>他何枚の写真</p>
+                  ${otherImages}
                   <button class="btn btn-warning" id="postShowBtn" data-toggle="modal" data-target="#postShowModal">詳細</button>
                   <button class="btn btn-info" id="newPostBtn" data-toggle="modal" data-target="#newPostModal">ここに投稿</button>
                 </div>`

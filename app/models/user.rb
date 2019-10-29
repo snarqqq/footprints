@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :viewports
   has_many :likes
 
-  validates :name, presence: true, length: { maximum: 30}
+  validates :name, presence: true, length: { maximum: 20}
   validates :email, presence: true
 
 end

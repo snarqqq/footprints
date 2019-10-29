@@ -24,7 +24,7 @@
                 .form-group
                   .field-label
                     = f.label :password
-                    %i (英数字8文字以上)
+                    %i (英数字6文字以上)
                   .field-input
                     = f.password_field :password, autocomplete: "off", class: "form-control", id: "user_password_sign_in"
                 .modal-footer
@@ -55,7 +55,7 @@
               .form-group
                 .field-label
                   = f.label :password
-                  %i (英数字8文字以上)
+                  %i (英数字6文字以上)
                 .field-input
                   = f.password_field :password, autocomplete: "off", class: "form-control"
               .form-group
