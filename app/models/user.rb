@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :posts
   has_many :viewports
   has_many :likes
+  has_one_attached :avatar
 
   validates :name, presence: true, length: { maximum: 20}
   validates :email, presence: true

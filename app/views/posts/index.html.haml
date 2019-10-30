@@ -3,7 +3,7 @@
   %nav.my-navbar.navbar.navbar-expand-sm
     .container-fluid
       .my-navbar__leftbox.navbar-brand
-        = link_to root_path, class:'row' do
+        = link_to root_path, class:'row', "data-turbolinks":"false" do
           = image_tag 'apple-touch-icon-180x180.png', alt: 'img', height: '50px', width: '50px', class: 'icon'
           %h1.my-navbar__head.ml-3 Footprints
       

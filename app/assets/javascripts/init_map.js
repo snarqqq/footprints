@@ -118,20 +118,19 @@ function initMap(){
     {name: 'Styled Map'});
   
   
-    map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 35.6806, lng: 139.769},
-    zoom: 1.6,
-    mapTypeControlOptions: {
-      mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
-              'styled_map']
-    }
-    });
-  
-    //Associate the styled map with the MapTypeId and set it to display.
-    map.mapTypes.set('styled_map', styledMapType);
-    map.setMapTypeId('styled_map');
-  
-    infowindow = new google.maps.InfoWindow();
-    createFootprints();
+  map = new google.maps.Map(document.getElementById('map'), {
+  center: {lat: 35.6806, lng: 139.769},
+  zoom: 1.6,
+  mapTypeControlOptions: {
+    mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
+            'styled_map']
   }
-  
+  });
+
+  //Associate the styled map with the MapTypeId and set it to display.
+  map.mapTypes.set('styled_map', styledMapType);
+  map.setMapTypeId('styled_map');
+
+  infowindow = new google.maps.InfoWindow();
+  createFootprints();
+}

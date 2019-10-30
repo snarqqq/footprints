@@ -13,4 +13,8 @@
   }
 
 -# %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.gcp_api_key}&libraries=places&callback=initMap"}
-%script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['gcp_api_key']}&libraries=places&callback=initMap"}
+%script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['gcp_api_key']}&libraries=places&callback=initMap", "data-turbolinks-eval": "false"}
+:javascript
+  if (map !== undefined) {
+    initMap();
+  }
