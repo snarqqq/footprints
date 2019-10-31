@@ -10,12 +10,16 @@
       .my-navbar__rightbox.col-2
         %ul.my-navbar__lists.navbar-nav
           %li.username.nav-item
-            = current_user.name
+            = link_to edit_user_path(current_user) do
+              - if current_user.avatar
+                = image_tag current_user.avatar_url, class: "my-navbar__avatar"
+              - else
+                = fa_icon 'user-circle', class: 'my-navbar__avatar'
+              %p
+                = current_user.name
           %li.userpage.nav-item
             = link_to edit_user_path(current_user) do
               = fa_icon 'cog', class: 'icon'
-          %li.newpost.nav-item
-            = link_to 'New Post', new_post_path
           %li.logout.nav-item
             = link_to 'Log Out', destroy_user_session_path, method: :delete, class:'log-out__btn'
 

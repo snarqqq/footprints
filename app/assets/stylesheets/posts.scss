@@ -18,6 +18,13 @@
   &__head {
     color: white;
   }
+  &__avatar {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 2.5rem;
+    object-fit: cover;
+    //タテヨコ比を変えないままトリミング
+  }
 }
 
 .main {
