@@ -83,5 +83,7 @@ gem 'mini_magick'
 gem 'fog-aws'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.3.1'
+gem 'omniauth'
+gem 'omniauth-facebook'
 # Security againgst Dos
 gem 'rack-attack'
