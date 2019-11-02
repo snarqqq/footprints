@@ -17,10 +17,11 @@ class User < ApplicationRecord
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
     unless user
+      binding.pry
       user = User.create(
         uid:      auth.uid,
         provider: auth.provider,
-        email:    auth.info.email,
+        email:    auth.info.email? ? auth.info.email : User.dummy_email(auth),
         password: Devise.friendly_token[0, 20],
         name:  auth.info.name,
         image:  auth.info.image
@@ -28,6 +29,13 @@ class User < ApplicationRecord
     end
 
     user
+  end
+
+  private
+
+  # ダミーのアドレスを用意
+  def self.dummy_email(auth)
+    "#{auth.uid}-#{auth.provider}@example.com"
   end
 
 end

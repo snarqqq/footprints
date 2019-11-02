@@ -262,6 +262,7 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
   config.omniauth :facebook, Rails.application.credentials.facebook[:app_id], Rails.application.credentials.facebook[:app_secret]
+  config.omniauth :twitter, Rails.application.credentials.twitter[:api_key], Rails.application.credentials.twitter[:api_secret_key], callback_url: "https://localhost:3000/users/omniauth_callbacks"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

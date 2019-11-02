@@ -85,5 +85,6 @@ gem 'jquery-rails'
 gem 'bootstrap', '~> 4.3.1'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 # Security againgst Dos
 gem 'rack-attack'
