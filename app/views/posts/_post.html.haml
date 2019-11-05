@@ -1,13 +1,9 @@
-.post{"data-postid": "#{post.id}"}
-  .post__upper-info
-    .post__user-name
-      = post.user.name
-    .post__place-name
+.post.card.mb-1{"data-postid": "#{post.id}"}
+  .card-body
+    %h5.card-title.post__place-name
       = post.place_name
-    .post__date
-      = post.created_at.strftime("%Y/%m/%d %H:%M")
-  .post__body
-    - if post.body.present?
-      %p.post__text
-        = post.body
-    = image_tag post.images.first.image_url, class: 'post__image' if post.images.first.present?
+    - if post.visit_date.present?
+      %h6.card-subtitle.text-muted.mb-1.post__date
+        visited_on: 
+        = post.visit_date
+    = image_tag post.images.first.image_url, class: 'card-img' if post.images.first.present?

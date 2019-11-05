@@ -1,77 +1,78 @@
 .dd-sign-in-wrapper
-  .container
-    .dd-sign-in-brand.row.justify-content-center
-      %h1.dd-sign-in-brand__head.text-white.border-white.rounded Footprints
-    .dd-sign-in-desc.row.justify-content-center
-      %h3.dd-sign-in-desc__text.text-white Log your journey
+  .dd-sign-in-wrapper__dark-overlay
+    .container
+      %header.dd-sign-in-brand.row.justify-content-center
+        %h1.dd-sign-in-brand__head.display-1.text-white.border-white.rounded Footprints
+      .dd-sign-in-desc.row.justify-content-center
+        %h3.dd-sign-in-desc__text.text-white Log your journey
 
-    .dd-sign-in-button.row.justify-content-center.mt-5
-      %button.col-2.btn.btn-success{"data-toggle": "modal", "data-target": "#signinModal"} サインイン
+      .dd-sign-in-button.row.justify-content-center.mt-5
+        %button.col-2.btn.btn-success{"data-toggle": "modal", "data-target": "#signinModal"} サインイン
 
-    #signinModal.modal
-      .modal-dialog
-        .modal-content
-          .modal-header
-            %h5.modal-title サインイン
-            %button.close{"data-dismiss": "modal"} &times;
-          .modal-body
-            = form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: "new_user_sign_in"})  do |f|
-              .form-group
-                .field-label
-                  = f.label :email
-                .field-input
-                  = f.email_field :email, autofocus: true, class: "form-control", id: "user_email_sign_in"
+      #signinModal.modal
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %h5.modal-title サインイン
+              %button.close{"data-dismiss": "modal"} &times;
+            .modal-body
+              = form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: "new_user_sign_in"})  do |f|
+                .form-group
+                  .field-label
+                    = f.label :email
+                  .field-input
+                    = f.email_field :email, autofocus: true, class: "form-control", id: "user_email_sign_in"
+                  .form-group
+                    .field-label
+                      = f.label :password
+                      %i (英数字6文字以上)
+                    .field-input
+                      = f.password_field :password, autocomplete: "off", class: "form-control", id: "user_password_sign_in"
+                  .modal-footer
+                    = f.submit "Sign in", class: 'btn btn-success'
+
+      .dd-sign-in-new-user.row.justify-content-center.mt-2
+        %button.col-2.btn.btn-info{"data-toggle": "modal", "data-target": "#signupModal"} 新規登録
+
+      - if devise_mapping.omniauthable?
+        - resource_class.omniauth_providers.each do |provider|
+          = link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider)
+          %br/
+
+      #signupModal.modal
+        .modal-dialog
+          .modal-content
+            .modal-header
+              %h5.modal-title 新規アカウントの登録
+              %button.close{"data-dismiss": "modal"} &times;
+            .modal-body
+              = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+                = devise_error_messages!
+                .form-group
+                  .field-label
+                    = f.label :name
+                  .field-input
+                    = f.text_field :name, autofocus: true, class: "form-control"
+                .form-group
+                  .field-label
+                    = f.label :email
+                  .field-input
+                    = f.email_field :email, class: "form-control"
                 .form-group
                   .field-label
                     = f.label :password
                     %i (英数字6文字以上)
                   .field-input
-                    = f.password_field :password, autocomplete: "off", class: "form-control", id: "user_password_sign_in"
+                    = f.password_field :password, autocomplete: "off", class: "form-control"
+                .form-group
+                  .field-label
+                    = f.label :password_confirmation
+                  .field-input
+                    = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
+                .form-group
+                  .field-label
+                    = f.label :avatar
+                  .field-input
+                    = f.file_field :avatar, class: "form-control"
                 .modal-footer
-                  = f.submit "Sign in", class: 'btn btn-success'
-
-    .dd-sign-in-new-user.row.justify-content-center.mt-2
-      %button.col-2.btn.btn-info{"data-toggle": "modal", "data-target": "#signupModal"} 新規登録
-
-    - if devise_mapping.omniauthable?
-      - resource_class.omniauth_providers.each do |provider|
-        = link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider)
-        %br/
-
-    #signupModal.modal
-      .modal-dialog
-        .modal-content
-          .modal-header
-            %h5.modal-title 新規アカウントの登録
-            %button.close{"data-dismiss": "modal"} &times;
-          .modal-body
-            = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-              = devise_error_messages!
-              .form-group
-                .field-label
-                  = f.label :name
-                .field-input
-                  = f.text_field :name, autofocus: true, class: "form-control"
-              .form-group
-                .field-label
-                  = f.label :email
-                .field-input
-                  = f.email_field :email, class: "form-control"
-              .form-group
-                .field-label
-                  = f.label :password
-                  %i (英数字6文字以上)
-                .field-input
-                  = f.password_field :password, autocomplete: "off", class: "form-control"
-              .form-group
-                .field-label
-                  = f.label :password_confirmation
-                .field-input
-                  = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
-              .form-group
-                .field-label
-                  = f.label :avatar
-                .field-input
-                  = f.file_field :avatar, class: "form-control"
-              .modal-footer
-                = f.submit "Create Account", class: 'btn btn-info'
+                  = f.submit "Create Account", class: 'btn btn-info'

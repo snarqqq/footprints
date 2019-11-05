@@ -1,35 +1,82 @@
 .post-index-wrapper
 
-  %nav.my-navbar.navbar.navbar-expand-sm
+  %nav.my-navbar.navbar.navbar-expand-sm.bg-dark.navbar-dark
     .container-fluid
-      .my-navbar__leftbox.navbar-brand
-        = link_to root_path, class:'row', "data-turbolinks":"false" do
-          = image_tag 'apple-touch-icon-180x180.png', alt: 'img', height: '50px', width: '50px', class: 'icon'
-          %h1.my-navbar__head.ml-3 Footprints
-      .my-navbar__rightbox.col-2
-        %ul.my-navbar__lists.navbar-nav
-          %li.username.nav-item
-            = link_to edit_user_path(current_user) do
+      = link_to root_path, class:'navbar-brand d-flex', "data-turbolinks":"false" do
+        = image_tag 'apple-touch-icon-180x180.png', alt: 'img', height: '50px', width: '50px', class: 'icon'
+        %h1.my-navbar__head.ml-3 Footprints
+
+      %button.navbar-toggler{"data-toggle": "collapse", "data-target": "navbarCollaplse"}
+        %span.navbar-toggler-icon
+      #navbarCollapse.collapse.navbar-collapse
+        %ul.navbar-nav.ml-auto
+          %li.nav-item
+            = link_to "Home", "#home-head-section", class: "nav-link"
+          %li.nav-item
+            = link_to "Explore", "#explore-head-section", class: "nav-link"
+          %li.nav-item
+            = link_to "Create", "#create-head-section", class: "nav-link"
+          %li.nav-item
+            = link_to edit_user_path(current_user), class: "nav-link" do
               - if current_user.avatar?
                 = image_tag current_user.avatar_url, class: "my-navbar__avatar"
               - elsif current_user.image?
-                = image_tag current_user.image, class: "my-navbar__avatar"
+                = image_tag current_user.image, class: "my-navbar__avata"
               - else
-                = fa_icon 'user-circle', class: 'my-navbar__avatar'
-              %p
-                = current_user.name
-          %li.userpage.nav-item
-            = link_to edit_user_path(current_user) do
-              = fa_icon 'cog', class: 'icon'
-          %li.logout.nav-item
-            = link_to 'Log Out', destroy_user_session_path, method: :delete, class:'log-out__btn'
+                = fa_icon 'user-circle', class: 'fa-2x'
 
-  %main.main
-    .map-wrapper
-      = render 'maps/index'
 
-    .posts
-      = render @posts
+      -# .my-navbar__rightbox.col-2
+      -#   %ul.my-navbar__lists.navbar-nav
+      -#     %li.username.nav-item
+      -#       = link_to edit_user_path(current_user) do
+      -#         - if current_user.avatar?
+      -#           = image_tag current_user.avatar_url, class: "my-navbar__avatar"
+      -#         - elsif current_user.image?
+      -#           = image_tag current_user.image, class: "my-navbar__avatar"
+      -#         - else
+      -#           = fa_icon 'user-circle', class: 'my-navbar__avatar'
+      -#         %p
+      -#           = current_user.name
+      -#     %li.userpage.nav-item
+      -#       = link_to edit_user_path(current_user) do
+      -#         = fa_icon 'cog', class: 'icon'
+      -#     %li.logout.nav-item
+      -#       = link_to 'Log Out', destroy_user_session_path, method: :delete, class:'log-out__btn'
+
+
+
+      -# .my-navbar__leftbox.navbar-brand
+      -#   = link_to root_path, class:'d-flex', "data-turbolinks":"false" do
+      -#     = image_tag 'apple-touch-icon-180x180.png', alt: 'img', height: '50px', width: '50px', class: 'icon'
+      -#     %h1.my-navbar__head.ml-3 Footprints
+      -# .my-navbar__rightbox.col-2
+      -#   %ul.my-navbar__lists.navbar-nav
+      -#     %li.username.nav-item
+      -#       = link_to edit_user_path(current_user) do
+      -#         - if current_user.avatar?
+      -#           = image_tag current_user.avatar_url, class: "my-navbar__avatar"
+      -#         - elsif current_user.image?
+      -#           = image_tag current_user.image, class: "my-navbar__avatar"
+      -#         - else
+      -#           = fa_icon 'user-circle', class: 'my-navbar__avatar'
+      -#         %p
+      -#           = current_user.name
+      -#     %li.userpage.nav-item
+      -#       = link_to edit_user_path(current_user) do
+      -#         = fa_icon 'cog', class: 'icon'
+      -#     %li.logout.nav-item
+      -#       = link_to 'Log Out', destroy_user_session_path, method: :delete, class:'log-out__btn'
+
+
+
+  %main.main.container-fluid.pt-3
+    .row
+      .map-wrapper.col-lg-9.p-4
+        = render 'maps/index'
+
+      .posts.col-lg-3.d-flex.flex-lg-column
+        = render @posts
 
 #newPostModal.modal
   .modal-dialog

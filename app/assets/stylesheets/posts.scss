@@ -1,7 +1,8 @@
 .my-navbar {
+  opacity: 0.9;
   // height: 80px;
   // width: 100%;
-  background-color: #444;
+  // background-color: #444;
   // display: flex;
   // justify-content: space-between;
   // border-bottom: 5px solid black;
@@ -9,31 +10,29 @@
     display: flex;
   }
   &__leftbox {
-    color: white;
     font-size: 40px;
     font-style: italic;
-    margin-left: 20px;
-    display: flex;
+    // margin-left: 20px;
   }
   &__head {
     color: white;
   }
   &__avatar {
-    width: 5rem;
-    height: 5rem;
-    border-radius: 2.5rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
     object-fit: cover;
     //タテヨコ比を変えないままトリミング
   }
 }
 
-.main {
-  display: flex;
-  justify-content: space-between;
-  .map-wrapper {
-    margin: 20px 0 0 60px;
-  }
-}
+// .main {
+//   // display: flex;
+//   // justify-content: space-between;
+//   // .map-wrapper {
+//   //   margin: 20px 0 0 60px;
+//   // }
+// }
 
 
 .search_form {
@@ -46,9 +45,18 @@
 }
 
 .posts {
-  margin-left: 50px;
   height: calc(100vh - 80px);
   overflow: scroll;
+  flex-wrap: wrap;
+  @include media-breakpoint-up(lg) {
+    flex-wrap: nowrap;
+  }
+  .post {
+    width: 33%;
+    @include media-breakpoint-up(lg) {
+      width: 100%;
+    }
+  }
 }
 
 .form {
