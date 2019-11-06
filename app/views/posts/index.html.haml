@@ -25,57 +25,12 @@
               - else
                 = fa_icon 'user-circle', class: 'fa-2x'
 
-
-      -# .my-navbar__rightbox.col-2
-      -#   %ul.my-navbar__lists.navbar-nav
-      -#     %li.username.nav-item
-      -#       = link_to edit_user_path(current_user) do
-      -#         - if current_user.avatar?
-      -#           = image_tag current_user.avatar_url, class: "my-navbar__avatar"
-      -#         - elsif current_user.image?
-      -#           = image_tag current_user.image, class: "my-navbar__avatar"
-      -#         - else
-      -#           = fa_icon 'user-circle', class: 'my-navbar__avatar'
-      -#         %p
-      -#           = current_user.name
-      -#     %li.userpage.nav-item
-      -#       = link_to edit_user_path(current_user) do
-      -#         = fa_icon 'cog', class: 'icon'
-      -#     %li.logout.nav-item
-      -#       = link_to 'Log Out', destroy_user_session_path, method: :delete, class:'log-out__btn'
-
-
-
-      -# .my-navbar__leftbox.navbar-brand
-      -#   = link_to root_path, class:'d-flex', "data-turbolinks":"false" do
-      -#     = image_tag 'apple-touch-icon-180x180.png', alt: 'img', height: '50px', width: '50px', class: 'icon'
-      -#     %h1.my-navbar__head.ml-3 Footprints
-      -# .my-navbar__rightbox.col-2
-      -#   %ul.my-navbar__lists.navbar-nav
-      -#     %li.username.nav-item
-      -#       = link_to edit_user_path(current_user) do
-      -#         - if current_user.avatar?
-      -#           = image_tag current_user.avatar_url, class: "my-navbar__avatar"
-      -#         - elsif current_user.image?
-      -#           = image_tag current_user.image, class: "my-navbar__avatar"
-      -#         - else
-      -#           = fa_icon 'user-circle', class: 'my-navbar__avatar'
-      -#         %p
-      -#           = current_user.name
-      -#     %li.userpage.nav-item
-      -#       = link_to edit_user_path(current_user) do
-      -#         = fa_icon 'cog', class: 'icon'
-      -#     %li.logout.nav-item
-      -#       = link_to 'Log Out', destroy_user_session_path, method: :delete, class:'log-out__btn'
-
-
-
   %main.main.container-fluid.pt-3
     .row
-      .map-wrapper.col-lg-9.p-4
+      .map-wrapper.col-lg-10
         = render 'maps/index'
 
-      .posts.col-lg-3.d-flex.flex-lg-column
+      .posts.col-lg-2.d-flex.flex-lg-column
         = render @posts
 
 #newPostModal.modal

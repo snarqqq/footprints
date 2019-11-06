@@ -2,19 +2,12 @@
   = f.text_field :address, placeholder: "Type place", class: "search_box form-control", id: "address-input"
   = f.button 'Search', id: 'search-submit', class: "btn btn-outline-dark btn-sm"
 .d-flex.mt-2.mb-2
-  %button.set-my-view.btn-success.rounded my view
-  %button.save-this-view.btn-success.rounded save this view
+  %button.set-my-view.btn.btn-sm.btn-success my view
+  %button.save-this-view.btn.btn-sm.btn-success.ml-1 save this view
 #map
 
-:css
-  #map{
-    height: 100%;
-    min-height: 300px;
-    width: 100%;
-  }
-
--# %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.gcp_api_key}&libraries=places&callback=initMap"}
 %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['gcp_api_key']}&libraries=places&callback=initMap", "data-turbolinks-eval": "false"}
+
 :javascript
   if (map !== undefined) {
     initMap();

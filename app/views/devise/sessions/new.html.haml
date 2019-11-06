@@ -1,19 +1,19 @@
-.dd-sign-in-wrapper
-  .dd-sign-in-wrapper__dark-overlay
+.signin-wrapper
+  .signin-wrapper__dark-overlay
     .container
-      %header.dd-sign-in-brand.row.justify-content-center
-        %h1.dd-sign-in-brand__head.display-1.text-white.border-white.rounded Footprints
-      .dd-sign-in-desc.row.justify-content-center
-        %h3.dd-sign-in-desc__text.text-white Log your journey
+      %header.signin-brand.row.justify-content-center
+        %h1.display-1.text-white.border-white.rounded Footprints
+      .row.justify-content-center
+        %h3.text-white Log your journey
 
-      .dd-sign-in-button.row.justify-content-center.mt-5
-        %button.col-2.btn.btn-success{"data-toggle": "modal", "data-target": "#signinModal"} サインイン
+      .row.justify-content-center.mt-5
+        %button.signin-btn.col-8.col-md-4.col-lg-3.btn.btn-success{"data-toggle": "modal", "data-target": "#signinModal"} ログイン
 
       #signinModal.modal
         .modal-dialog
           .modal-content
             .modal-header
-              %h5.modal-title サインイン
+              %h5.modal-title ログイン
               %button.close{"data-dismiss": "modal"} &times;
             .modal-body
               = form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: "new_user_sign_in"})  do |f|
@@ -31,13 +31,18 @@
                   .modal-footer
                     = f.submit "Sign in", class: 'btn btn-success'
 
-      .dd-sign-in-new-user.row.justify-content-center.mt-2
-        %button.col-2.btn.btn-info{"data-toggle": "modal", "data-target": "#signupModal"} 新規登録
-
       - if devise_mapping.omniauthable?
         - resource_class.omniauth_providers.each do |provider|
-          = link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider)
-          %br/
+          .row.justify-content-center.mt-2
+            = link_to omniauth_authorize_path(resource_name, provider), class: "col-8 col-md-4 col-lg-3 btn #{provider.to_s}-login-btn" do
+              - if provider == :facebook
+                %i.fa.fa-facebook-official.fa-2x.mr-2
+              - elsif provider == :twitter
+                %i.fa.fa-twitter.fa-2x
+              %span.align-middle #{OmniAuth::Utils.camelize(provider)}でログイン
+
+      .row.justify-content-center.mt-2
+        %button.signup-btn.col-8.col-md-4.col-lg-3.btn.btn-danger{"data-toggle": "modal", "data-target": "#signupModal"} 新規登録
 
       #signupModal.modal
         .modal-dialog
