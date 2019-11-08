@@ -7,14 +7,8 @@ $(document).on('turbolinks:load', function() {
 
 });
 
-let service;
 let clickPlace;
 let foundPlaceMarkers = [];
-// let foundPlaceName;
-// let foundGeometry;
-// let foundPlaceId;
-// let foundIcon;
-
 
 function findPlace(){
   deleteMarkers();
@@ -38,10 +32,6 @@ function findPlace(){
       }
       map.setCenter(results[0].geometry.location);
       map.fitBounds(results[0].geometry.viewport);
-      // foundPlaceName = results[0].name;
-      // foundGeometry = results[0].geometry.location;
-      // foundPlaceId = results[0].place_id;
-      // foundIcon = results[0].icon;
     } else {
       alert(`"${inputAddress}"に対する検索結果は見つかりませんでした。\n他のキーワードで再度お試しください。`)
     }
@@ -101,14 +91,16 @@ function createMarkerFromDB(place) {
   let content =`<div>
                   <div class="d-flex justify-content-between align-items-center">
                     <h5>${place.place_name}</h5>
-                    <p class="align-self-end">${place.visit_date}</p>
+                    <span class="">${place.visit_date}</p>
                   </div>
                   <h6>${place.title}</h6>
                   <p>${place.body}</p>
                   <div>${imageHtml}</div>
                   ${otherImages}
-                  <button class="btn btn-warning" id="postShowBtn" data-toggle="modal" data-target="#postShowModal">詳細</button>
-                  <button class="btn btn-info" id="newPostBtn" data-toggle="modal" data-target="#newPostModal">ここに投稿</button>
+                  <div class="mt-2">
+                    <button class="btn btn-warning" id="postShowBtn" data-toggle="modal" data-target="#postShowModal">詳細</button>
+                    <button class="btn btn-info" id="newPostBtn" data-toggle="modal" data-target="#newPostModal">ここに投稿</button>
+                  </div>
                 </div>`
 
   google.maps.event.addListener(marker, 'click', function() {
