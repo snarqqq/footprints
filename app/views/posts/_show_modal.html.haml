@@ -11,7 +11,7 @@
     = post.visit_date
   - post.images.each do |image|
     %div
-      = image_tag image.image_url, class:""
+      = image_tag image.image_url, class:"mb-2"
   %p
     = post.body
   .modal-footer

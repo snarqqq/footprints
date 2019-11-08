@@ -1,9 +1,35 @@
-.post.card.mt-2.mt-lg-0.mb-1{"data-postid": "#{post.id}", "data-lat": "#{post.place.lat}", "data-lng": "#{post.place.lng}"}
-  .card-body
-    %h5.card-title.post__place-name
-      = post.place_name
-    - if post.visit_date.present?
-      %h6.card-subtitle.text-muted.mb-1.post__date
-        visited_on: 
-        = post.visit_date
-    = image_tag post.images.first.image_url, class: 'card-img' if post.images.first.present?
+.post.flip-box.card.mt-2.mt-lg-0.mb-1{"data-postid": "#{post.id}", "data-lat": "#{post.place.lat}", "data-lng": "#{post.place.lng}"}
+  .flip-box-inner
+    = image_tag post.images.first.image_url, class: 'flip-box-front card-img img-fluid' if post.images.first.present?
+    .card-img-overlay
+      -# %h5.card-title.post__place-name
+      -#   = post.place_name
+      -# - if post.visit_date.present?
+      -#   %h6.card-subtitle.text-muted.mb-1.post__date
+      -#     visited_on: 
+      -#     = post.visit_date
+    .flip-box-back.card-body
+      %h5.card-title.post__place-name
+        = post.place_name
+      - if post.visit_date.present?
+        %h6.card-subtitle.text-muted.mb-1.post__date
+          visited_on: 
+          = post.visit_date
+
+
+-# .post.card.mt-2.mt-lg-0.mb-1{"data-postid": "#{post.id}", "data-lat": "#{post.place.lat}", "data-lng": "#{post.place.lng}"}
+-#   .card-body
+-#     %h5.card-title.post__place-name
+-#       = post.place_name
+-#     - if post.visit_date.present?
+-#       %h6.card-subtitle.text-muted.mb-1.post__date
+-#         visited_on: 
+-#         = post.visit_date
+    -# = image_tag post.images.first.image_url, class: 'card-img' if post.images.first.present?
+
+
+-# .flip-box
+-#   .flip-box-inner
+-#     .flip-box-front
+-#       %img
+-#     .flip-box-back
