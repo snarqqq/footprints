@@ -119,7 +119,7 @@ function createMarkerFromDB(place) {
 function createFootprints() {
   // AjaxでDBから情報取得
   $.ajax({
-    url: '/posts',
+    url: '/api/posts',
     type: "GET",
     dataType: 'json',
   })

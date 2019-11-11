@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :posts
   resources :users, only: [:edit, :update]
   resources :maps, only: [:index, :map]
+  namespace :api do
+    resources :posts, only: :index, defaults: { format: 'json' }
+  end
   # get '/map_request', to: 'posts#map', as: 'map_request'
   post '/map_request', to: 'maps#map', as: 'map_request'
   post '/save_viewport', to: 'maps#save_viewport', as: 'save_viewport'

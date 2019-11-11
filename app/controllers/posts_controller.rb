@@ -5,12 +5,6 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = current_user.posts.order("created_at DESC").includes(:place, :images)
-    # @places = current_user.places.includes(:posts where ~~~)
-
-    respond_to do |format|
-      format.html
-      format.json
-    end
   end
 
   # GET /posts/1
