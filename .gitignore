@@ -31,3 +31,5 @@
 
 public/uploads/*
 /config/certs/*
+# Ignore master key for decrypting credentials and more.
+/config/master-test.key
