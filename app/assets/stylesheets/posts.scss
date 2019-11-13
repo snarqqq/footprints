@@ -42,12 +42,22 @@
 }
 
 
-.posts {
+.my-recent-posts {
   height: calc(100vh - 80px);
-  overflow: scroll;
-  flex-wrap: wrap;
-  @include media-breakpoint-up(lg) {
-    flex-wrap: nowrap;
+
+  &__head {
+    margin: 0 -15px;
+    .icon {
+      object-fit: contain;
+    }
+  }
+  &__content {
+    height: 100%;
+    overflow: scroll;
+    flex-wrap: wrap;
+    @include media-breakpoint-up(lg) {
+      flex-wrap: nowrap;
+    }
   }
   .post {
     width: 33%;

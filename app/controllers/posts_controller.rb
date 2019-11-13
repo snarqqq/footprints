@@ -3,6 +3,7 @@ class PostsController < ApplicationController
 
   # GET /posts
   # GET /posts.json
+  # 一つのリクエストに対して複数のフォーマットで返せない？(htmlとjson)
   def index
     @posts = current_user.posts.order("created_at DESC").includes(:place, :images)
   end

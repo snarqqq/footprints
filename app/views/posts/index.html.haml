@@ -25,13 +25,17 @@
               - else
                 = fa_icon 'user-circle', class: 'fa-2x'
 
-  %main.main.container-fluid.pt-3
+  %main.main.container-fluid.pt-2
     .row
       .map-wrapper.col-lg-10
         = render 'maps/index'
 
-      .posts.col-lg-2.d-flex.flex-lg-column
-        = render @posts
+      .my-recent-posts.bg-light.col-lg-2
+        .my-recent-posts__head.d-flex.justify-content-center.align-items-center.border.mb-2.p-1.pr-4.bg-white
+          = image_tag asset_path('footprint_marker.png'), alt: 'img', height: '40rem', width: '40rem', class: 'icon'
+          %h5.text-center.m-0 recent
+        .my-recent-posts__content.d-flex.flex-lg-column
+          = render @posts
 
 #newPostModal.modal
   .modal-dialog
