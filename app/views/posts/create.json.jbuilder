@@ -1,3 +1,5 @@
+json.user_id @post.user.id
+json.user_name @post.user.name
 json.post_id @post.id
 json.place_name @post.place_name
 json.title @post.title

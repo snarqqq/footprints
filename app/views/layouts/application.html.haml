@@ -18,6 +18,9 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     -# = javascript_include_tag 'application', data: { turbolinks: { track: true }}
     -# %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{ENV['gcp_api_key']}&libraries=places&callback=initMap", onload: "test()"}
-
+    :javascript
+      $(document).on('turbolinks:load', function() {
+        currentUserId = Number("#{current_user&.id}");
+      });
   %body
     = yield

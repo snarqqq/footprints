@@ -3,6 +3,7 @@
     = image_tag post.images.first.image_url, class: 'flip-box-front card-img img-fluid' if post.images.first.present?
     .card-img-overlay
       = user_icon(post.user, "post__user-icon m-n2")
+      = post.user.name
       -# %h5.card-title.post__place-name
       -#   = post.place_name
       -# - if post.visit_date.present?

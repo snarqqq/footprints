@@ -5,8 +5,8 @@ class PostsController < ApplicationController
   # GET /posts.json
   # 一つのリクエストに対して複数のフォーマットで返せない？(htmlとjson)
   def index
-    @posts = Post.where("id != ?", current_user.id).limit(21)
-    @my_recent_posts = current_user.posts.order("created_at DESC").includes(:place, :images)
+    @posts = Post.where("user_id != ?", current_user.id).limit(21).includes(:place, :images)
+    @my_recent_posts = current_user.posts.order("created_at DESC").includes(:place, :images, :user)
   end
 
   # GET /posts/1

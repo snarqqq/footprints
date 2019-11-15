@@ -71,20 +71,27 @@ let clickedMarker;
 
 function createMarkerFromDB(place) {
   let position = {lat: Number(place.lat), lng: Number(place.lng)};
-  let imageUrl = window.image_path('footprint_marker.png');
-  let image = {
-    // url: '/assets/footprint_marker.png'
-    url: imageUrl
-    // size: new google.maps.Size(20, 32),
-    // origin: new google.maps.Point(0, 0),
-    // anchor: new google.maps.Point(10, 32)
-  };
-  let marker = new google.maps.Marker({
-    map: map,
-    icon: image,
-    animation: google.maps.Animation.DROP,
-    position: position
-  });
+  if (markerPositions.indexOf(position) === -1) {
+    if (place.user_id === currentUserId) {
+      var imageUrl = window.image_path('footprint_marker.png');
+    } else {
+      var imageUrl = window.image_path('someones_marker.png');
+    }
+    let image = {
+      // url: '/assets/footprint_marker.png'
+      url: imageUrl
+      // size: new google.maps.Size(20, 32),
+      // origin: new google.maps.Point(0, 0),
+      // anchor: new google.maps.Point(10, 32)
+    };
+    var marker = new google.maps.Marker({
+      map: map,
+      icon: image,
+      animation: google.maps.Animation.DROP,
+      position: position
+    });
+    markerPositions.push(position);
+  }
 
   let imageHtml = place.images[0] === undefined ? "" : `<img src="${place.images[0].image.url}" class="lower-message__image">`;
   let otherImages = place.images.length > 1 ? `<p>他${place.images.length - 1}枚の写真</p>` : "";
@@ -115,7 +122,7 @@ function createMarkerFromDB(place) {
 
 }
 
-
+let markerPositions = [];
 function createFootprints() {
   // AjaxでDBから情報取得
   $.ajax({
@@ -136,6 +143,21 @@ function createFootprints() {
     });
     console.log(filteredPosts);
 
+    // place_idごとに配列に格納
+    // let postsGroupedByPlaceId = [];
+    // for (var i = 0, i < posts.length; i++) {
+    //   if (postsGroupedByPlaceId.findIndex(function(v,i2,a){
+    //     for(key in v){ key === post[i].place_id}
+    //   })
+    //   )
+    //   if (post[i].place_id === )
+    //   let objct = {post[i].place_id: [post[i]]};
+    //   postsGroupedByPlaceId.push(objct);
+
+    // }
+
+
+
     // // 重複しているものの重複を取り除いた配列
     // let reversedPosts = posts.slice().reverse();
     // console.log(reversedPosts);
@@ -150,6 +172,7 @@ function createFootprints() {
     // });
 
     for (var i = 0; i < filteredPosts.length; i++) {
+
       addMarkerWithTimeout(filteredPosts[i], i * 50);
     }
 
