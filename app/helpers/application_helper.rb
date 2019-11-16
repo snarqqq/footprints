@@ -1,11 +1,12 @@
 module ApplicationHelper
-  def user_icon(user, class_name)
+  def user_icon(user, options={})
     if user.avatar?
-      image_tag user.avatar_url, class: class_name
+      image_tag user.avatar_url, options
     elsif user.image?
-      image_tag user.image, class: class_name
+      image_tag user.image, options
     else
-      fa_icon "user-circle", class: "fa-2x #{class_name}"
+      options[:class] = options[:class] + " fa-2x"
+      fa_icon "user-circle", options
     end
   end
 end
