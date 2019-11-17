@@ -9,14 +9,33 @@
     = post.user.name
   %p
     = post.visit_date
-  - post.images.each do |image|
-    %div
-      = image_tag image.image_url, class:"mb-2"
+  
+  #postShowSlider.carousel.slide{"data-ride": "carousel"}
+    %ol.carousel-indicators
+      - post.images.each_with_index do |image, i|
+        - if i == 0 
+          %li.active{"data-target": "#postShowSlider", "data-slide-to": "0"}
+        - else
+          %li{"data-target": "#postShowSlider", "data-slide-to": "#{i}"}
+    .carousel-inner.bg-dark
+      - post.images.each_with_index do |image, i|
+        - if i == 0
+          .carousel-item.active
+            = image_tag image.image_url, class: "slider__image"
+        - else
+          .carousel-item
+            = image_tag image.image_url, class: "slider__image"
+    %a.carousel-control-prev{href: "#postShowSlider", "data-slide": "prev"}
+      %span.carousel-control-prev-icon
+    %a.carousel-control-next{href: "#postShowSlider", "data-slide": "next"}
+      %span.carousel-control-next-icon
+
   %p
     = post.body
   .modal-footer
-    = link_to post_path(post), method: :delete, remote: true, class:"" do
-      .btn.btn-danger 削除
-    = link_to edit_post_path(post),remote: true, class: "edit-link", data: {"turbolinks": false} do
-      .btn.btn-warning 編集
+    - if post.user_id === current_user.id
+      = link_to post_path(post), method: :delete, remote: true, class:"" do
+        .btn.btn-danger 削除
+      = link_to edit_post_path(post),remote: true, class: "edit-link", data: {"turbolinks": false} do
+        .btn.btn-warning 編集
     #postEditBtn.d-none{"data-toggle": "modal", "data-target": "#newPostModal"}
