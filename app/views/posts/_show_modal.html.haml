@@ -11,12 +11,13 @@
     = post.visit_date
   
   #postShowSlider.carousel.slide{"data-ride": "carousel"}
-    %ol.carousel-indicators
-      - post.images.each_with_index do |image, i|
-        - if i == 0 
-          %li.active{"data-target": "#postShowSlider", "data-slide-to": "0"}
-        - else
-          %li{"data-target": "#postShowSlider", "data-slide-to": "#{i}"}
+    - if post.images.length > 1
+      %ol.carousel-indicators
+        - post.images.each_with_index do |image, i|
+          - if i == 0 
+            %li.active{"data-target": "#postShowSlider", "data-slide-to": "0"}
+          - else
+            %li{"data-target": "#postShowSlider", "data-slide-to": "#{i}"}
     .carousel-inner.bg-dark
       - post.images.each_with_index do |image, i|
         - if i == 0
@@ -25,10 +26,11 @@
         - else
           .carousel-item
             = image_tag image.image_url, class: "slider__image"
-    %a.carousel-control-prev{href: "#postShowSlider", "data-slide": "prev"}
-      %span.carousel-control-prev-icon
-    %a.carousel-control-next{href: "#postShowSlider", "data-slide": "next"}
-      %span.carousel-control-next-icon
+    - if post.images.length > 1
+      %a.carousel-control-prev{href: "#postShowSlider", "data-slide": "prev"}
+        %span.carousel-control-prev-icon
+      %a.carousel-control-next{href: "#postShowSlider", "data-slide": "next"}
+        %span.carousel-control-next-icon
 
   %p
     = post.body
