@@ -92,7 +92,7 @@
   .modal-dialog
     #userEditModalContent.modal-content
       .modal-header
-        %h5.modal-title 新規アカウントの登録
+        %h5.modal-title アカウントの編集
         %button.close{"data-dismiss": "modal"} &times;
       .modal-body
         = form_for(current_user) do |f|
@@ -106,12 +106,6 @@
               = f.label :email
             .field-input
               = f.email_field :email, class: "form-control"
-          .form-group
-            .field-label
-              = f.label :password
-              %i (英数字6文字以上)
-            .field-input
-              = f.password_field :password, autocomplete: "off", class: "form-control"
           .form-group
             .field-label
               = f.label :avatar
