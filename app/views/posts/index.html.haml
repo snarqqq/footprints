@@ -41,52 +41,31 @@
 #newPostModal.modal
   .modal-dialog
     #newPostModalContent.modal-content
-      -# = render partial: 'form', locals: {post: @post}
-
-      -# .modal-header
-      -#   %h5.modal-title{id: "newPostModalTitle"}
-      -#     投稿内容を入力してください
-      -#   %button.close{id: "newPostModalClose", "data-dismiss": "modal"} &times;
-      -# .modal-body
-      -#   = form_with model: @post, class:'newpost-form__form', id: 'newpost-form__form', local: true do |f|
-      -#     .form-group
-      -#       .field-label
-      -#         = f.label :title, "タイトル"
-      -#       .field-input
-      -#         = f.text_field :title, placeholder: "タイトル（40文字まで）", value: "", class: "form-control"
-      -#     .form-group
-      -#       .field-label
-      -#         = f.label :visit_date, "訪問日"
-      -#       .field-input
-      -#         = f.date_field :visit_date, class: "form-control", id: "newPostFormVisitDate"
-      -#     .form-group
-      -#       %h6 写真
-      -#       #file-drop-area
-      -#         %p#newpost-modal__image-text.newpost-modal__image-text.text-center.text-muted
-      -#           ドラッグ&ドロップ
-      -#           %br
-      -#           またはクリックして画像をアップロード
-      -#         .dropzone-previews
-
-      -#       -# = f.fields_for :images do |fin|
-      -#       -#   = fin.label :image, "写真" do
-      -#       -#     .item-registration__form__group__image{id: 'file-drop-area'}
-      -#       -#       .nest-form__head
-      -#       -#         = fin.file_field :image, multiple: true, name: 'images[image][]', style:"display:none;", class: "form-control newPostFormImages"
-      -#       -#         %p ドラッグアンドドロップ
-      -#       -#         %p またはクリックしてファイルをアップロード
-
-      -#     .form-group
-      -#       .field-label
-      -#         = f.label :body, "本文"
-      -#       .field-input
-      -#         = f.text_area :body, placeholder: "本文を入力", class: "form-control", id: "newPostFormBody"
-      -#     .modal-footer
-      -#       = f.submit "投稿する", { id: 'newPostFormSubmit', class: "btn btn-warning", data: {disable_with: false}}
 
 #postShowModal.modal
   .modal-dialog
     #postShowModalContent.modal-content
+
+#likeNewModal.modal
+  .modal-dialog
+    #likeNewModalContent.modal-content
+      .modal-header
+        %h5.modal-title{id: "likeNewModalTitle"}
+          投稿内容を入力してください
+        %button.close{id: "likeNewModalClose", "data-dismiss": "modal"} &times;
+      .modal-body
+        = form_with model: @like, class:'newpost-form__form', id: "post-#{action_name}-form", local: true do |f|
+          .form-group
+            .field-label
+              = f.label :note, "メモ"
+            .field-input
+              = f.text_field :title, placeholder: "メモ（40文字まで）", class: "form-control"
+          .modal-footer
+            - if action_name == 'edit'
+              = f.submit "保存", {id: "editPostFormSubmit", class: "btn btn-warning"}
+            - else
+              = f.submit "投稿", { id: 'newPostFormSubmit', class: "btn btn-warning", data: {disable_with: false}}
+
 
 #userEditModal.modal
   .modal-dialog

@@ -51,7 +51,14 @@ function createMarker(place) {
   let content =`<div>
                 <h5>${place.name}</h5>
                 <p>${place.formatted_address}</p>
-                <button class="btn btn-info" id="newPostBtn" data-toggle="modal" data-target="#newPostModal">ここに投稿</button>
+                <button class="btn btn-outline-info" id="newPostBtn" data-toggle="modal" data-target="#likeNewModal">
+                  <img src="${window.image_path('wannago_marker.png')}">
+                  行きたい
+                </button>
+                <button class="btn btn-outline-warning" id="newPostBtn" data-toggle="modal" data-target="#newPostModal">
+                  <img src="${window.image_path('footprint_marker.png')}">
+                  ここに投稿
+                </button>
                 </div>`
 
   google.maps.event.addListener(marker, 'click', function() {
