@@ -46,15 +46,13 @@ $(document).on('turbolinks:load', function() {
         url: `/posts/${clickPlace.post_id}`,
         type: "PATCH",
         data: formData,
-        dataType: 'script',
         processData: false,
         contentType: false
       })
       .done(function(post){
-        // $('#newPostModalClose').trigger('click');
-        // infowindow.close();
-        // deleteMarkers();
-        // createMarkerFromDB(post);
+        $('#newPostModalClose').trigger('click');
+        $('#wannagoNewModalClose').trigger('click');
+        $('#postShowBtn').trigger('click');
       })
       .fail(function(){
         alert('error_post_update');

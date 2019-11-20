@@ -6,6 +6,7 @@ json.array! @my_recent_posts do |post|
   json.title post.title
   json.visit_date post.visit_date&.strftime("%Y/%m/%d")
   json.body post.body
+  json.already_visited post.already_visited
   json.images post.images
   json.place_id post.place.place_id
   json.lat post.place.lat
@@ -21,6 +22,7 @@ json.array! @posts do |post|
   json.visit_date post.visit_date&.strftime("%Y/%m/%d")
   json.body post.body
   json.images post.images
+  json.already_visited post.already_visited
   json.place_id post.place.place_id
   json.lat post.place.lat
   json.lng post.place.lng

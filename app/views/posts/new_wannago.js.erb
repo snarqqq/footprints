@@ -1,0 +1,6 @@
+(function() {
+  $('#newPostModalContent').empty();
+  $('#newPostModalContent').append("<%= j(render partial: 'posts/wannago_form', locals: {post: @post}) %>");
+  let placeName = clickPlace.name !== undefined ? clickPlace.name : clickPlace.place_name;
+  $('#wannagoNewModalTitle').text(placeName);
+}());

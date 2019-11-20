@@ -1,0 +1,17 @@
+.modal-header
+  %h5.modal-title{id: "wannagoNewModalTitle"}
+    投稿内容を入力してください
+  %button.close{id: "wannagoNewModalClose", "data-dismiss": "modal"} &times;
+.modal-body
+  = form_with model: @post, class:'newpost-form__form', id: "post-#{action_name}-form", local: true do |f|
+    .form-group
+      .field-label
+        = f.label :body, "メモ"
+      .field-input
+        = f.text_field :title, placeholder: "メモ（40文字まで）", class: "form-control"
+      = f.hidden_field :already_visited, {value: false}
+    .modal-footer
+      - if action_name == 'edit'
+        = f.submit "保存", {id: "editPostFormSubmit", class: "btn btn-warning"}
+      - else
+        = f.submit "投稿", { id: 'newPostFormSubmit', class: "btn btn-warning", data: {disable_with: false}}

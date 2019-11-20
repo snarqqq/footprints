@@ -51,7 +51,7 @@ function createMarker(place) {
   let content =`<div>
                 <h5>${place.name}</h5>
                 <p>${place.formatted_address}</p>
-                <button class="btn btn-outline-info" id="newPostBtn" data-toggle="modal" data-target="#likeNewModal">
+                <button class="btn btn-outline-info" id="newWannagoBtn" data-toggle="modal" data-target="#newPostModal">
                   <img src="${window.image_path('wannago_marker.png')}">
                   行きたい
                 </button>
@@ -77,10 +77,11 @@ function createMarker(place) {
 let clickedMarker;
 
 function createMarkerFromDB(place) {
+  console.log(place.already_visited);
   let position = {lat: Number(place.lat), lng: Number(place.lng)};
   if (markerPositions.indexOf(position) === -1) {
     if (place.user_id === currentUserId) {
-      var imageUrl = window.image_path('footprint_marker.png');
+      var imageUrl = place.already_visited === true ? window.image_path('footprint_marker.png') : window.image_path('wannago_marker.png');
     } else {
       var imageUrl = window.image_path('someones_marker.png');
     }

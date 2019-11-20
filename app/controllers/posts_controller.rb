@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   # 一つのリクエストに対して複数のフォーマットで返せない？(htmlとjson)
   def index
+    @post = Post.new
     @posts = Post.where("user_id != ?", current_user.id).order(created_at: :desc).limit(21).includes(:place, :images)
     @my_recent_posts = current_user.posts.order(created_at: :desc).includes(:place, :images, :user)
   end
@@ -19,7 +20,11 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
-    render 'new.js.erb'
+    if params[:already_visited] == "false"
+      render 'new_wannago.js.erb'
+    else
+      render 'new.js.erb'
+    end
   end
 
   # GET /posts/1/edit
@@ -110,7 +115,7 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       place_name = params.require(:place_name)
-      params.require(:post).permit(:title, :visit_date, :body).merge(user_id: current_user.id, place_name: place_name)
+      params.require(:post).permit(:title, :visit_date, :body, :already_visited).merge(user_id: current_user.id, place_name: place_name)
       # params.permit(:title, :visit_date, :body).merge(user_id: current_user.id, place_name: place_name)
     end
 

@@ -46,25 +46,25 @@
   .modal-dialog
     #postShowModalContent.modal-content
 
-#likeNewModal.modal
-  .modal-dialog
-    #likeNewModalContent.modal-content
-      .modal-header
-        %h5.modal-title{id: "likeNewModalTitle"}
-          投稿内容を入力してください
-        %button.close{id: "likeNewModalClose", "data-dismiss": "modal"} &times;
-      .modal-body
-        = form_with model: @like, class:'newpost-form__form', id: "post-#{action_name}-form", local: true do |f|
-          .form-group
-            .field-label
-              = f.label :note, "メモ"
-            .field-input
-              = f.text_field :title, placeholder: "メモ（40文字まで）", class: "form-control"
-          .modal-footer
-            - if action_name == 'edit'
-              = f.submit "保存", {id: "editPostFormSubmit", class: "btn btn-warning"}
-            - else
-              = f.submit "投稿", { id: 'newPostFormSubmit', class: "btn btn-warning", data: {disable_with: false}}
+-# #likeNewModal.modal
+-#   .modal-dialog
+-#     #likeNewModalContent.modal-content
+-#       .modal-header
+-#         %h5.modal-title{id: "likeNewModalTitle"}
+-#           投稿内容を入力してください
+-#         %button.close{id: "likeNewModalClose", "data-dismiss": "modal"} &times;
+-#       .modal-body
+-#         = form_with model: @post, class:'newpost-form__form', id: "post-#{action_name}-form", local: true do |f|
+-#           .form-group
+-#             .field-label
+-#               = f.label :body, "メモ"
+-#             .field-input
+-#               = f.text_field :title, placeholder: "メモ（40文字まで）", class: "form-control"
+-#           .modal-footer
+-#             - if action_name == 'edit'
+-#               = f.submit "保存", {id: "editPostFormSubmit", class: "btn btn-warning"}
+-#             - else
+-#               = f.submit "投稿", { id: 'newPostFormSubmit', class: "btn btn-warning", data: {disable_with: false}}
 
 
 #userEditModal.modal
