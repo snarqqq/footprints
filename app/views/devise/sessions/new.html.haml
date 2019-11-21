@@ -17,6 +17,7 @@
               %button.close{"data-dismiss": "modal"} &times;
             .modal-body
               = form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: "new_user_sign_in"})  do |f|
+                = devise_error_messages!
                 .form-group
                   .field-label
                     = f.label :email

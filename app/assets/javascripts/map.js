@@ -1,4 +1,5 @@
 $(document).on('turbolinks:load', function() {
+  console.log('turboliks loaded');
 
   $('#search-submit').on('click', function(e) {
     e.preventDefault();

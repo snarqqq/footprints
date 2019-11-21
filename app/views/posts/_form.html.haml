@@ -13,7 +13,8 @@
       .field-label
         = f.label :visit_date, "訪問日"
       .field-input
-        = f.date_field :visit_date, class: "form-control", id: "newPostFormVisitDate"
+        - today = Date.today.strftime("%Y-%m-%d")
+        = f.date_field :visit_date, class: "form-control", id: "newPostFormVisitDate", max: today
     .form-group
       %h6 写真
       #file-drop-area

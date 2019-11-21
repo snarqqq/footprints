@@ -11,7 +11,7 @@
       #navbarCollapse.collapse.navbar-collapse
         %ul.navbar-nav.ml-auto
           %li.nav-item
-            = link_to "Map", "#home-head-section", class: "nav-link"
+            = link_to "My map", "#home-head-section", class: "nav-link"
           %li.nav-item
             = link_to "Explore", "#explore-head-section", class: "nav-link"
           %li.nav-item
@@ -37,6 +37,24 @@
           %h5.text-center.m-0 recent
         .my-recent-posts__content.d-flex.flex-lg-column
           = render partial: 'post', collection: @my_recent_posts
+
+  %section.my-posts
+    .container-fluid
+      .row.flex-column
+        - year_month = []
+        - count = 0
+        - @my_all_posts.each do |post|
+          - year_month_index = year_month.find_index {|x| x == post.visit_date&.strftime("%Y/%m")}
+          - if year_month_index == nil
+            %div
+              = post.visit_date&.strftime("%Y/%m")
+            - year_month << post.visit_date&.strftime("%Y/%m")
+            %div.d-flex
+              - @my_all_posts.each do |post|
+                - year_month_index = year_month.find_index {|x| x == post.visit_date&.strftime("%Y/%m")}
+                - if year_month_index == count
+                  = render partial: 'post', locals: {post: post}
+              - count += 1
 
 #newPostModal.modal
   .modal-dialog

@@ -30,6 +30,10 @@
   }
 }
 
+.main {
+  overflow: hidden;
+}
+
 .search_form {
   display: flex;
 }
@@ -68,6 +72,27 @@
     @include media-breakpoint-up(lg) {
       width: 100%;
     }
+    &:hover {
+      opacity: 0.7;
+    }
+    .post {
+      border: hidden;
+    }
+    .card-title {
+      -webkit-text-stroke: 0.02rem #fff;
+    }
+    &__user-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 1.5rem;
+      object-fit: cover;
+    }
+  }
+}
+
+.my-posts {
+  .post {
+    width: 33%;
     &:hover {
       opacity: 0.7;
     }
