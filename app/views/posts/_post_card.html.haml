@@ -1,0 +1,16 @@
+.card{"data-postid": "#{post.id}", "data-lat": "#{post.place.lat}", "data-lng": "#{post.place.lng}"}
+  = image_tag post.images.first.image_url, class: 'card-img-top img-fluid' if post.images.first.present?
+  .card-img-overlay
+    = user_icon(post.user, {class: "post__user-icon m-n2"})
+    = post.user.name
+  .card-body
+    %h4.card-title
+      = post.place_name
+    %p.card-text
+      = post.title
+    %p.card-text
+      %small.text-muted
+        - if post.visit_date.present?
+          %h6.card-subtitle.text-muted.mb-1.post__date
+            visited_on: 
+            = post.visit_date

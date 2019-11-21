@@ -53,7 +53,7 @@
               - @my_all_posts.each do |post|
                 - year_month_index = year_month.find_index {|x| x == post.visit_date&.strftime("%Y/%m")}
                 - if year_month_index == count
-                  = render partial: 'post', locals: {post: post}
+                  = render partial: 'post_card', locals: {post: post}
               - count += 1
 
 #newPostModal.modal
@@ -63,27 +63,6 @@
 #postShowModal.modal
   .modal-dialog
     #postShowModalContent.modal-content
-
--# #likeNewModal.modal
--#   .modal-dialog
--#     #likeNewModalContent.modal-content
--#       .modal-header
--#         %h5.modal-title{id: "likeNewModalTitle"}
--#           投稿内容を入力してください
--#         %button.close{id: "likeNewModalClose", "data-dismiss": "modal"} &times;
--#       .modal-body
--#         = form_with model: @post, class:'newpost-form__form', id: "post-#{action_name}-form", local: true do |f|
--#           .form-group
--#             .field-label
--#               = f.label :body, "メモ"
--#             .field-input
--#               = f.text_field :title, placeholder: "メモ（40文字まで）", class: "form-control"
--#           .modal-footer
--#             - if action_name == 'edit'
--#               = f.submit "保存", {id: "editPostFormSubmit", class: "btn btn-warning"}
--#             - else
--#               = f.submit "投稿", { id: 'newPostFormSubmit', class: "btn btn-warning", data: {disable_with: false}}
-
 
 #userEditModal.modal
   .modal-dialog
