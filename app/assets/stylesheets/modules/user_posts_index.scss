@@ -1,0 +1,12 @@
+.user-posts-index {
+  width: 100vw;
+  &__head {
+    top: calc(2.0rem + 50px);
+  }
+  .d-flex {
+    flex-wrap: wrap;
+  }
+  .card {
+    width: 25%;
+  }
+}

@@ -32,6 +32,7 @@
 
 .main {
   overflow: hidden;
+  padding-top: calc(2.5rem + 50px);
 }
 
 .search_form {
@@ -52,9 +53,20 @@
 
 .my-recent-posts {
   height: calc(100vh - 80px);
+  position: relative;
+  transition: all .5s ease-out;
+  &.aside {
+    transform: translateX(-150px);
+  }
+  &__chevron {
+    transition: all .5s ease-out;
+    &.aside {
+      transform: rotate(180deg);
+    }
+  }
 
   &__head {
-    margin: 0 -15px;
+    margin: 0 -10px;
     .icon {
       object-fit: contain;
     }
@@ -187,6 +199,7 @@
   height: 100%;
   overflow: hidden;
   backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Style the front side (fallback if image is missing) */
