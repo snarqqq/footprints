@@ -1,6 +1,6 @@
-.post-index-wrapper.w-100
+#home.post-index-wrapper.w-100{"data-spy": "scroll", "data-target": "#main-nav"}
 
-  %nav.my-navbar.navbar.navbar-expand-sm.bg-dark.navbar-dark.fixed-top
+  %nav#main-nav.my-navbar.navbar.navbar-expand-sm.bg-dark.navbar-dark.fixed-top
     .container-fluid
       = link_to root_path, class:'navbar-brand d-flex', "data-turbolinks":"false" do
         = image_tag 'apple-touch-icon-180x180.png', alt: 'img', height: '50px', width: '50px', class: 'icon'
@@ -11,11 +11,11 @@
       #navbarCollapse.collapse.navbar-collapse
         %ul.navbar-nav.ml-auto
           %li.nav-item
-            = link_to "My map", "#home-head-section", class: "nav-link"
+            = link_to "My map", "#home", class: "nav-link"
           %li.nav-item
-            = link_to "Wannagos", "#explore-head-section", class: "nav-link"
+            = link_to "Wannagos", "#wannagos-head-section", class: "nav-link"
           %li.nav-item
-            = link_to "Footprints", "#create-head-section", class: "nav-link"
+            = link_to "Footprints", "#footprints-head-section", class: "nav-link"
           %li.nav-item
             = user_icon(current_user, {class: "my-navbar__avatar nav-link", "data-toggle": "modal", "data-target": "#userEditModal"})
 
@@ -40,7 +40,7 @@
         .my-recent-posts__content.d-flex.flex-lg-column
           = render partial: 'post', collection: @my_recent_posts
 
-  %section.user-wannagos-index
+  %section#wannagos-head-section.user-wannagos-index
   .container-fluid
     .row.flex-column
       %h1.text-center.bg-light
@@ -54,7 +54,7 @@
           = render partial: 'post_card', locals: {post: wannago}
 
 
-  %section.user-posts-index.my-3
+  %section#footprints-head-section.user-posts-index.my-3
     .container-fluid
       .row.flex-column
         %h1.text-center.bg-light
@@ -87,15 +87,15 @@
           %button.btn.btn-outline-warning{"data-toggle": "modal", "data-target": "#contactModal"}
             Contact Us
 
-#newPostModal.modal
+#newPostModal.modal.fade
   .modal-dialog
     #newPostModalContent.modal-content
 
-#postShowModal.modal
+#postShowModal.modal.fade
   .modal-dialog
     #postShowModalContent.modal-content
 
-#userEditModal.modal
+#userEditModal.modal.fade
   .modal-dialog
     #userEditModalContent.modal-content
       .modal-header
