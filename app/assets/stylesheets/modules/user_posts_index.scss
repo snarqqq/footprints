@@ -1,7 +1,10 @@
 .user-posts-index {
-  width: 100vw;
+  width: 100%;
   &__head {
     top: calc(2.0rem + 50px);
+  }
+  .icon {
+    object-fit: contain;
   }
   .d-flex {
     flex-wrap: wrap;

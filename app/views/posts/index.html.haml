@@ -1,4 +1,4 @@
-.post-index-wrapper
+.post-index-wrapper.w-100
 
   %nav.my-navbar.navbar.navbar-expand-sm.bg-dark.navbar-dark.fixed-top
     .container-fluid
@@ -21,12 +21,12 @@
 
   %main.main.container-fluid
     .row
-      .my-recent-posts.bg-light.col-lg-2
-        .my-recent-posts__head.d-flex.justify-content-center.align-items-center.border.mb-2.p-1.pr-4.bg-white
+      .latest-posts.bg-light.col-lg-2
+        .latest-posts__head.d-flex.justify-content-center.align-items-center.border.mb-2.p-1.pr-4.bg-white
           = image_tag asset_path('someones_marker.png'), alt: 'img', height: '40rem', width: '40rem', class: 'icon'
           %h5.text-center.m-0 latest
-          = fa_icon "chevron-circle-right", class: "my-recent-posts__chevron fa-2x ml-3"
-        .my-recent-posts__content.d-flex.flex-lg-column
+          = fa_icon "chevron-circle-left", class: "latest-posts__chevron fa-2x ml-3"
+        .latest-posts__content.d-flex.flex-lg-column
           = render @posts
 
       .map-wrapper.col-lg-8
@@ -35,13 +35,31 @@
       .my-recent-posts.bg-light.col-lg-2
         .my-recent-posts__head.d-flex.justify-content-center.align-items-center.border.mb-2.p-1.pr-4.bg-white
           = image_tag asset_path('footprint_marker.png'), alt: 'img', height: '40rem', width: '40rem', class: 'icon'
+          = fa_icon "chevron-circle-right", class: "my-recent-posts__chevron fa-2x ml-3"
           %h5.text-center.m-0 recent
         .my-recent-posts__content.d-flex.flex-lg-column
           = render partial: 'post', collection: @my_recent_posts
 
-  %section.user-posts-index
+  %section.user-wannagos-index
+  .container-fluid
+    .row.flex-column
+      %h1.text-center.bg-light
+        = image_tag asset_path('wannago_marker.png'), alt: 'img', height: '40rem', width: '40rem', class: 'icon'
+        Wannagos
+      - if @wannagos.empty?
+        %h3.text-center
+          まだ行きたい場所はありません。
+      .d-flex
+        - @wannagos.each do |wannago|
+          = render partial: 'post_card', locals: {post: wannago}
+
+
+  %section.user-posts-index.my-3
     .container-fluid
       .row.flex-column
+        %h1.text-center.bg-light
+          = image_tag asset_path('footprint_marker.png'), alt: 'img', height: '40rem', width: '40rem', class: 'icon'
+          Footprints
         - year_month = []
         - count = 0
         - @my_all_posts.each do |post|
@@ -50,7 +68,7 @@
             %h2.user-posts-index__head.bg-light.text-center.mt-3.sticky-top
               = post.visit_date&.strftime("%Y/%m")
             - year_month << post.visit_date&.strftime("%Y/%m")
-            %div.d-flex.col-12
+            %div.d-flex.w-100.justify-content-center
               - @my_all_posts.each do |post|
                 - year_month_index = year_month.find_index {|x| x == post.visit_date&.strftime("%Y/%m")}
                 - if year_month_index == count

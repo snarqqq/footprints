@@ -30,9 +30,95 @@
   }
 }
 
+.latest-posts {
+  height: calc(100vh - 80px);
+  position: relative;
+  transition: all .5s ease-out;
+  &.aside {
+    transform: translateX(-180px);
+  }
+  &__head {
+    position: relative;
+  }
+  &__chevron {
+    transition: all .5s ease-out;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translate(0 ,-50%);
+    &.aside {
+      transform: translate(0 ,-50%) rotate(-180deg);
+    }
+  }
+  &__head {
+    margin: 0 -10px;
+    .icon {
+      object-fit: contain;
+    }
+  }
+  &__content {
+    height: 100%;
+    overflow: scroll;
+    flex-wrap: wrap;
+    @include media-breakpoint-up(lg) {
+      flex-wrap: nowrap;
+    }
+  }
+  .post {
+    width: 33%;
+    @include media-breakpoint-up(lg) {
+      width: 100%;
+    }
+    &:hover {
+      opacity: 0.7;
+    }
+    .post {
+      border: hidden;
+    }
+    .card-title {
+      -webkit-text-stroke: 0.02rem #fff;
+    }
+    &__user-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 1.5rem;
+      object-fit: cover;
+    }
+  }
+}
+
+
 .main {
   overflow: hidden;
   padding-top: calc(2.5rem + 50px);
+  .row {
+    flex-wrap: nowrap;
+  }
+  .map-wrapper {
+    transition: all .5s ease-out;
+    &.wider-left {
+    width: +180px;
+    transform: translateX(-180px);
+    max-width: calc(100/12*8% + 180px);
+    flex-basis: calc(100/12*8% + 180px);
+    }
+    &.wider-right {
+      width: +180px;
+      // transform: translateX(-180px);
+      max-width: calc(100/12*8% + 180px);
+      flex-basis: calc(100/12*8% + 180px);
+      }
+    &.wider-both {
+      width: +180px;
+      max-width: calc(100/12*8% + 360px);
+      flex-basis: calc(100/12*8% + 360px);
+      }
+  }
+  #map {
+    height: calc(100vh - 200px);
+    min-height: 300px;
+    width: 100%;
+  }
 }
 
 .search_form {
@@ -44,24 +130,27 @@
   margin-right: 10px; 
 }
 
-#map {
-  height: calc(100vh - 200px);
-  min-height: 300px;
-  width: 100%;
-}
+
 
 
 .my-recent-posts {
   height: calc(100vh - 80px);
   position: relative;
   transition: all .5s ease-out;
-  &.aside {
-    transform: translateX(-150px);
+  &.wider-left {
+    transform: translateX(-180px);
+  }
+  &__head {
+    position: relative;
   }
   &__chevron {
     transition: all .5s ease-out;
+    position: absolute;
+    left: -5px;
+    top: 50%;
+    transform: translate(0 ,-50%);
     &.aside {
-      transform: rotate(180deg);
+      transform: translate(0 ,-50%) rotate(180deg);
     }
   }
 
