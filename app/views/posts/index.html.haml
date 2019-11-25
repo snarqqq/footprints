@@ -41,17 +41,17 @@
           = render partial: 'post', collection: @my_recent_posts
 
   %section#wannagos-head-section.user-wannagos-index
-  .container-fluid
-    .row.flex-column
-      %h1.text-center.bg-light
-        = image_tag asset_path('wannago_marker.png'), alt: 'img', height: '40rem', width: '40rem', class: 'icon'
-        Wannagos
-      - if @wannagos.empty?
-        %h3.text-center
-          まだ行きたい場所はありません。
-      .d-flex
-        - @wannagos.each do |wannago|
-          = render partial: 'post_card', locals: {post: wannago}
+    .container-fluid
+      .row.flex-column
+        %h1.text-center.bg-light.user-wannagos-index__head
+          = image_tag asset_path('wannago_marker.png'), alt: 'img', height: '40rem', width: '40rem', class: 'icon'
+          Wannagos
+        - if @wannagos.empty?
+          %h3.text-center
+            まだ行きたい場所はありません。
+        .d-flex.justify-content-center
+          - @wannagos.each do |wannago|
+            = render partial: 'post_card', locals: {post: wannago}
 
 
   %section#footprints-head-section.user-posts-index.my-3

@@ -1,8 +1,8 @@
-.card.mx-3{"data-postid": "#{post.id}", "data-lat": "#{post.place.lat}", "data-lng": "#{post.place.lng}"}
+.post-card.card.mx-3{"data-postid": "#{post.id}", "data-lat": "#{post.place.lat}", "data-lng": "#{post.place.lng}"}
   = image_tag post.images.first.image_url, class: 'card-img-top img-fluid' if post.images.first.present?
   - if post.images.present?
     .card-img-overlay
-      = user_icon(post.user, {class: "post__user-icon m-n2"})
+      = user_icon(post.user, {class: "post-card__user-icon m-n2"})
       = post.user.name
   .card-body
     %h4.card-title
