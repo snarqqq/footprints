@@ -2,7 +2,7 @@
   .flip-box-inner
     = image_tag post.images.first.image_url, class: 'flip-box-front card-img img-fluid' if post.images.first.present?
     .card-img-overlay
-      = user_icon(post.user, {class: "post__user-icon m-n2"})
+      = user_icon(post.user, {class: "post__user-icon mt-n2 ml-n2"})
       = post.user.name
       -# %h5.card-title.post__place-name
       -#   = post.place_name
