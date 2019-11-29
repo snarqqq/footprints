@@ -59,6 +59,7 @@ $(document).on('turbolinks:load', function() {
       })
       .done(function(post){
         $('#newPostModalClose').trigger('click');
+        $('#wannagoNewModalClose').trigger('click');
         infowindow.close();
         deleteMarkers();
         console.log(post);
