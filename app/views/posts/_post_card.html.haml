@@ -9,6 +9,9 @@
       = post.place_name
     %p.card-text
       = post.title
+    - if post.already_visited == false
+      %p.card-text
+        = post.body
     %p.card-text
       %small.text-muted
         - if post.visit_date.present?
