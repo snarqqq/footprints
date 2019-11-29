@@ -3,7 +3,8 @@
   - if post.images.present?
     .card-img-overlay
       = user_icon(post.user, {class: "post-card__user-icon m-n2"})
-      = post.user.name
+      %span.ml-2
+        = post.user.name
   .card-body
     %h4.card-title
       = post.place_name
