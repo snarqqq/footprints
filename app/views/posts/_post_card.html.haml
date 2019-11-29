@@ -1,4 +1,4 @@
-.post-card.card.mx-3{"data-postid": "#{post.id}", "data-lat": "#{post.place.lat}", "data-lng": "#{post.place.lng}"}
+.post-card.card.mx-3.mb-1{"data-postid": "#{post.id}", "data-lat": "#{post.place.lat}", "data-lng": "#{post.place.lng}"}
   = image_tag post.images.first.image_url, class: 'card-img-top img-fluid' if post.images.first.present?
   - if post.images.present?
     .card-img-overlay
