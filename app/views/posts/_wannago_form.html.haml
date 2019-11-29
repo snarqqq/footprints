@@ -8,7 +8,7 @@
       .field-label
         = f.label :body, "メモ"
       .field-input
-        = f.text_field :title, placeholder: "メモ（40文字まで）", class: "form-control"
+        = f.text_field :body, placeholder: "メモ（1000文字まで）", class: "form-control"
       = f.hidden_field :already_visited, {value: false}
     .modal-footer
       - if action_name == 'edit'

@@ -7,4 +7,5 @@ class Post < ApplicationRecord
 
   validates :place_name, presence: true
   validates :title, length: { maximum: 40 }
+  validates :body, length: { maximum: 1000 }
 end
