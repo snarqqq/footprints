@@ -104,13 +104,16 @@ function createMarkerFromDB(place) {
 
   let imageHtml = place.images[0] === undefined ? "" : `<img src="${place.images[0].image.url}" class="lower-message__image">`;
   let otherImages = place.images.length > 1 ? `<p>他${place.images.length - 1}枚の写真</p>` : "";
+  let visitDate = place.visit_date === null ? "" : `<span class="">${place.visit_date}</p>`;
+  let title = place.title === null ? "" : `<h6>${place.title}</h6>`;
+  let body = place.body === null ? "" : `<p>${place.body}</p>`;
   let content =`<div>
                   <div class="d-flex justify-content-between align-items-center">
                     <h5>${place.place_name}</h5>
-                    <span class="">${place.visit_date}</p>
+                    ${visitDate}
                   </div>
-                  <h6>${place.title}</h6>
-                  <p>${place.body}</p>
+                  ${title}
+                  ${body}
                   <div>${imageHtml}</div>
                   ${otherImages}
                   <div class="mt-2">
