@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   # 一つのリクエストに対して複数のフォーマットで返せない？(htmlとjson)
   def index
     @post = Post.new
-    @posts = Post.where("user_id != ?", current_user.id).order(created_at: :desc).limit(21).includes(:place, :images)
+    @posts = Post.where("user_id != ? and already_visited == ?", current_user.id, true).order(created_at: :desc).limit(21).includes(:place, :images)
     @my_recent_posts = current_user.posts.where(already_visited: 1).order(created_at: :desc).includes(:place, :images, :user)
     @my_all_posts = current_user.posts.where(already_visited: 1).order(visit_date: :desc).includes(:place, :images, :user)
     @wannagos = current_user.posts.where(already_visited: 0).order(created_at: :desc).includes(:place, :images, :user)
