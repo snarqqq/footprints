@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 describe User do
-  describe '#create' do
+  describe "#create" do
     it "is valid with a name, email, password, password_confirmation" do
       user = build(:user)
       expect(user).to be_valid
@@ -61,26 +61,26 @@ describe User do
 
     context "sign up using facebook"
 
-      # before do
-      #   OmniAuth.config.mock_auth[:facebook] = nil
-      #   Rails.application.env_config['omniauth.auth'] = facebook_mock
-      #   visit root_path
-      #   click_link "ログイン"
-      # end
+    # before do
+    #   OmniAuth.config.mock_auth[:facebook] = nil
+    #   Rails.application.env_config['omniauth.auth'] = facebook_mock
+    #   visit root_path
+    #   click_link "ログイン"
+    # end
 
-      # it "サインアップするとユーザーが増える" do
-      #   expect{
-      #     click_link "Facebookでログイン"
-      #   }.to change(User, :count).by(1)
-      # end
+    # it "サインアップするとユーザーが増える" do
+    #   expect{
+    #     click_link "Facebookでログイン"
+    #   }.to change(User, :count).by(1)
+    # end
 
-      # it "すでに連携されたユーザーがサインアップしようとするとユーザーは増えない" do
-      #   click_link "Facebookでログイン"
-      #   click_link "ログアウト"
-      #   click_link "ログイン"
-      #   expect{
-      #     click_link "Facebookでログイン"
-      #   }.not_to change(User, :count)
-      # end
+    # it "すでに連携されたユーザーがサインアップしようとするとユーザーは増えない" do
+    #   click_link "Facebookでログイン"
+    #   click_link "ログアウト"
+    #   click_link "ログイン"
+    #   expect{
+    #     click_link "Facebookでログイン"
+    #   }.not_to change(User, :count)
+    # end
   end
 end

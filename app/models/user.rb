@@ -10,31 +10,28 @@ class User < ApplicationRecord
   has_many :viewports
   has_many :likes
 
-  validates :name, presence: true, length: { maximum: 20}
+  validates :name, presence: true, length: { maximum: 20 }
   validates :email, presence: true
 
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
-    unless user
-      user = User.create(
-        uid:      auth.uid,
-        provider: auth.provider,
-        email:    auth.info.email? ? auth.info.email : User.dummy_email(auth),
-        password: Devise.friendly_token[0, 20],
-        name:  auth.info.name,
-        image:  auth.info.image
-      )
-    end
+    user ||= User.create(
+      uid: auth.uid,
+      provider: auth.provider,
+      email: auth.info.email? ? auth.info.email : User.dummy_email(auth),
+      password: Devise.friendly_token[0, 20],
+      name: auth.info.name,
+      image: auth.info.image
+    )
 
     user
   end
 
   private
 
-  # ダミーのアドレスを用意
-  def self.dummy_email(auth)
-    "#{auth.uid}-#{auth.provider}@example.com"
-  end
-
+    # ダミーのアドレスを用意
+    def self.dummy_email(auth)
+      "#{auth.uid}-#{auth.provider}@example.com"
+    end
 end

@@ -28,5 +28,4 @@ json.array! @posts do |post|
   json.lng post.place.lng
 end
 
-
 # json.array! @posts, partial: "posts/post", as: :post

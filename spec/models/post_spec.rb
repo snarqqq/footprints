@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 describe Post do
-  describe '#create' do
+  describe "#create" do
     it "is invalid without a place_name" do
       post = build(:post, place_name: nil)
       post.valid?

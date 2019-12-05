@@ -1,12 +1,12 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: %i[show edit update destroy]
 
   # GET /posts
   # GET /posts.json
   # 一つのリクエストに対して複数のフォーマットで返せない？(htmlとjson)
   def index
     @post = Post.new
-    @posts = Post.where('user_id != ? and already_visited = ?', current_user.id, 1).order(created_at: :desc).limit(21).includes(:place, :images)
+    @posts = Post.where("user_id != ? and already_visited = ?", current_user.id, 1).order(created_at: :desc).limit(21).includes(:place, :images)
     @my_recent_posts = current_user.posts.where(already_visited: 1).order(created_at: :desc).includes(:place, :images, :user)
     @my_all_posts = current_user.posts.where(already_visited: 1).order(visit_date: :desc).includes(:place, :images, :user)
     @wannagos = current_user.posts.where(already_visited: 0).order(created_at: :desc).includes(:place, :images, :user)
@@ -16,22 +16,22 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
-    render 'show.js.erb'
+    render "show.js.erb"
   end
 
   # GET /posts/new
   def new
     @post = Post.new
     if params[:already_visited] == "false"
-      render 'new_wannago.js.erb'
+      render "new_wannago.js.erb"
     else
-      render 'new.js.erb'
+      render "new.js.erb"
     end
   end
 
   # GET /posts/1/edit
   def edit
-    render 'edit.js.erb'
+    render "edit.js.erb"
   end
 
   # POST /posts
@@ -48,7 +48,7 @@ class PostsController < ApplicationController
       # image_params[:image].each do |image|
       #   @post.images.create(image: image, post_id: @post.id)
       # end
-      image_params[:image].each do |num, image|
+      image_params[:image].each do |_num, image|
         @post.images.create(image: image, post_id: @post.id)
       end
 
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to @post, notice: "Post was successfully created." }
         format.json
       else
         format.html { render :new }
@@ -71,19 +71,17 @@ class PostsController < ApplicationController
     @post.update!(post_params)
 
     if image_remove_params != ""
-      imageRemoveIds = image_remove_params.split(",").map{|x| x.to_i}
+      imageRemoveIds = image_remove_params.split(",").map(&:to_i)
       remove_images = Image.where(id: params[:imageRemoveIds])
-      remove_images.each do |image|
-        image.destroy
-      end
+      remove_images.each(&:destroy)
     end
 
     if params[:images]
-      image_params[:image].each do |num, image|
+      image_params[:image].each do |_num, image|
         @post.images.create(image: image, post_id: @post.id)
       end
     end
-    render 'update.js.erb'
+    render "update.js.erb"
     # respond_to do |format|
     #   if @post.update(post_params)
     #     # format.html { redirect_to @post, notice: 'Post was successfully updated.' }
@@ -101,7 +99,7 @@ class PostsController < ApplicationController
   def destroy
     @other_posts_judge = Post.where(place_id: @post.place_id).length
     @post.destroy if @post.user_id == current_user.id
-    render 'destroy.js.erb'
+    render "destroy.js.erb"
     # respond_to do |format|
     #   format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
     #   format.json { head :no_content }
@@ -109,6 +107,7 @@ class PostsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
@@ -127,11 +126,10 @@ class PostsController < ApplicationController
 
     def image_params
       # params.require(:images)
-      params.require(:images).permit({image: {}})
+      params.require(:images).permit({ image: {} })
     end
 
     def image_remove_params
       params.permit(:imageRemoveIds)[:imageRemoveIds]
     end
-
 end

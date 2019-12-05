@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 # target_version:
 #   rubocop v0.34.2
 

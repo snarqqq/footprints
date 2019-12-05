@@ -1,5 +1,3 @@
 class Rack::Attack
-  throttle('req/ip', :limit => 200, :period => 5.minutes) do |req|
-    req.ip # unless req.path.start_with?('/assets')
-  end
+  throttle("req/ip", limit: 200, period: 5.minutes, &:ip)
 end

@@ -1,6 +1,5 @@
 class MapsController < ApplicationController
-  def index
-  end
+  def index; end
 
   def save_viewport
     @viewport = Viewport.find_or_initialize_by(user_id: current_user.id)
@@ -32,9 +31,8 @@ class MapsController < ApplicationController
     def viewport_params
       params.permit(:sw_lat, :sw_lng, :ne_lat, :ne_lng)
     end
-  
+
     def map_params
       params.require(:post).permit(:body, :image).merge(user_id: current_user.id)
     end
-
 end

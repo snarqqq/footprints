@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def user_icon(user, options={})
+  def user_icon(user, options = {})
     if user.avatar?
       image_tag user.avatar_url, options
     elsif user.image?
