@@ -8,6 +8,16 @@ AllCops:
     - "db/schema.rb"
   DisplayCopNames: true
 
+##################### Layout ##################################
+
+# * migrate
+# * jbuilder
+# * model の association
+# * controller の callback
+# 辺りの桁揃えで引っかかるので全体的にチェックしない
+Layout/SpaceBeforeFirstArg:
+  Enabled: false
+
 ##################### Style ##################################
 
 # redirect_to xxx and return のイディオムを維持したい
@@ -47,10 +57,6 @@ Style/CollectionMethods:
     find: "detect"
     inject: "inject"
     reduce: "inject"
-
-# Hash#has_key? は許可したい
-Style/DeprecatedHashMethods:
-  Enabled: false
 
 # ドキュメントの無い public class を許可する
 Style/Documentation:
@@ -96,14 +102,9 @@ Style/HashSyntax:
 Style/IfUnlessModifier:
   Enabled: false
 
-# ({ と hash を開始した場合に ( の位置にインデントさせる
-# そもそも {} が必要ない可能性が高いが Style/BracesAroundHashParameters はチェックしないことにしたので
-Style/IndentHash:
-  EnforcedStyle: consistent
-
 # private/protected は一段深くインデントする
 Style/IndentationConsistency:
-  EnforcedStyle: rails
+  EnforcedStyle: indented_internal_methods
 
 # scope 等は複数行でも lambda ではなく ->{} で揃えた方が見た目が綺麗
 Style/Lambda:
@@ -120,7 +121,7 @@ Style/PerlBackrefs:
 
 # has_ から始まるメソッドは許可する
 Style/PredicateName:
-  NamePrefixBlacklist:
+  ForbiddenPrefixes:
     - "is_"
     - "have_"
   NamePrefix:
@@ -146,10 +147,7 @@ Style/SignalException:
 
 # `||` も align に使うことがあるので追加する
 Style/SpaceAroundOperators:
-  MultiSpaceAllowedForOperators:
-    - "="
-    - "=>"
-    - "||"
+  AllowForAlignment: true
 
 # * 式展開したい場合に書き換えるのが面倒
 # * 文章ではダブルクォートよりもシングルクォートの方が頻出する
@@ -164,18 +162,6 @@ Style/StringLiteralsInInterpolation:
 # いくらなんでも inject { |a, e| } は短すぎるので分かりやすい名前をつけたい
 Style/SingleLineBlockParams:
   Enabled: false
-
-# * migrate
-# * jbuilder
-# * model の association
-# * controller の callback
-# 辺りの桁揃えで引っかかるので全体的にチェックしない
-Style/SingleSpaceBeforeFirstArg:
-  Enabled: false
-
-# 複数行の場合はケツカンマを入れる
-Style/TrailingComma:
-  EnforcedStyleForMultiline: comma
 
 ##################### Lint ##################################
 
