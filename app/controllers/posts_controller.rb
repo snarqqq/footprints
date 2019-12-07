@@ -1,9 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
-  # GET /posts
-  # GET /posts.json
-  # 一つのリクエストに対して複数のフォーマットで返せない？(htmlとjson)
   def index
     @post = Post.new
     @posts = Post.where("user_id != ? and already_visited = ?", current_user.id, 1).order(created_at: :desc).limit(21).includes(:place, :images)
@@ -12,14 +9,11 @@ class PostsController < ApplicationController
     @wannagos = current_user.posts.where(already_visited: 0).order(created_at: :desc).includes(:place, :images, :user)
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
     render "show.js.erb"
   end
 
-  # GET /posts/new
   def new
     @post = Post.new
     if params[:already_visited] == "false"
@@ -29,13 +23,10 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET /posts/1/edit
   def edit
     render "edit.js.erb"
   end
 
-  # POST /posts
-  # POST /posts.json
   def create
     @place = Place.find_or_initialize_by(place_id: place_params[:place_id])
     @place.lat = place_params[:lat]
@@ -65,8 +56,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
   def update
     @post.update!(post_params)
 
@@ -94,8 +83,6 @@ class PostsController < ApplicationController
     # end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
     @other_posts_judge = Post.where(place_id: @post.place_id).length
     @post.destroy if @post.user_id == current_user.id
@@ -108,12 +95,10 @@ class PostsController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       place_name = params.require(:place_name)
       params.require(:post).permit(:title, :visit_date, :body, :already_visited).merge(user_id: current_user.id, place_name: place_name)

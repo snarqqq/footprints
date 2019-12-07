@@ -14,18 +14,6 @@ class MapsController < ApplicationController
     @viewport = Viewport.find_by(id: current_user.id)
   end
 
-  # def map
-  #   @place = params[:address]
-  #   results = Geocoder.search(@place)
-  #   @latlng = results.first.coordinates
-  #   map = Map.new(place: @place, lat: @latlng[0], lon: @latlng[1])
-  #   map.save
-
-  #   respond_to do |format|
-  #     format.js
-  #   end
-  # end
-
   private
 
     def viewport_params
