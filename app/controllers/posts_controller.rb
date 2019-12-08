@@ -3,10 +3,10 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @posts = Post.where("user_id != ? and already_visited = ?", current_user.id, 1).order(created_at: :desc).limit(21).includes(:place, :images)
-    @my_recent_posts = current_user.posts.where(already_visited: 1).order(created_at: :desc).includes(:place, :images, :user)
-    @my_all_posts = current_user.posts.where(already_visited: 1).order(visit_date: :desc).includes(:place, :images, :user)
-    @wannagos = current_user.posts.where(already_visited: 0).order(created_at: :desc).includes(:place, :images, :user)
+    @posts = Post.other_users(current_user.id).already_visited.recently_posted.limit(21).includes(:place, :images)
+    @my_recent_posts = current_user.posts.already_visited.recently_posted.includes(:place, :images, :user)
+    @my_all_posts = current_user.posts.already_visited.recently_visited.includes(:place, :images, :user)
+    @wannagos = current_user.posts.not_visited.recently_posted.includes(:place, :images, :user)
   end
 
   def show
@@ -36,9 +36,6 @@ class PostsController < ApplicationController
     @post.save!
 
     if params[:images]
-      # image_params[:image].each do |image|
-      #   @post.images.create(image: image, post_id: @post.id)
-      # end
       image_params[:image].each do |_num, image|
         @post.images.create(image: image, post_id: @post.id)
       end
